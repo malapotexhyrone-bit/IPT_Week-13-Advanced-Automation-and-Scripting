@@ -1,0 +1,102 @@
+**********************
+PowerShell transcript start
+Start time: 20261029221241
+Username: LAPTOP-CKODFKHT\Admin
+RunAs User: LAPTOP-CKODFKHT\Admin
+Configuration Name:
+Machine: LAPTOP-CKODFKHT (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$result='C:\Users\Admin\Documents\IPT\student-clearance-week13\evidence\test-results\EVID-W13-SETUP-002-baseline-tests.txt'; Start-Transcript -LiteralPath $result -Force | Out-Null; $failed=$false; Write-Output 'EVID-W13-SETUP-002 Baseline Framework Verification'; Write-Output 'Controlled environment: local Laravel, Flutter Web, and MariaDB'; Write-Output "`n[1] Laravel database migration against MariaDB"; php artisan migrate:fresh --force; if($LASTEXITCODE -ne 0){$failed=$true}; Write-Output "`n[2] Laravel baseline tests"; php artisan test; if($LASTEXITCODE -ne 0){$failed=$true}; Write-Output "`n[3] Flutter static analysis"; flutter analyze; if($LASTEXITCODE -ne 0){$failed=$true}; Write-Output "`n[4] Flutter baseline tests"; flutter test; if($LASTEXITCODE -ne 0){$failed=$true}; Stop-Transcript | Out-Null; if($failed){throw 'One or more baseline checks failed; inspect the saved transcript.'}
+Process ID: 11028
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26300
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+EVID-W13-SETUP-002 Baseline Framework Verification
+Controlled environment: local Laravel, Flutter Web, and MariaDB
+
+[1] Laravel database migration against MariaDB
+
+
+[2] Laravel baseline tests
+
+
+[3] Flutter static analysis
+
+
+[4] Flutter baseline tests
+
+**********************
+PowerShell transcript end
+End time: 20261029221250
+**********************
+**********************
+PowerShell transcript start
+Start time: 20261029221259
+Username: LAPTOP-CKODFKHT\Admin
+RunAs User: LAPTOP-CKODFKHT\Admin
+Configuration Name:
+Machine: LAPTOP-CKODFKHT (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+$result='C:\Users\Admin\Documents\IPT\student-clearance-week13\evidence\test-results\EVID-W13-SETUP-002-baseline-tests.txt'; Start-Transcript -LiteralPath $result -Append | Out-Null; $failed=$false; Write-Output "`nRETEST after correcting working directory"; Write-Output '[3R] Flutter static analysis from frontend'; flutter analyze; if($LASTEXITCODE -ne 0){$failed=$true}; Write-Output "`n[4R] Flutter baseline tests from frontend"; flutter test; if($LASTEXITCODE -ne 0){$failed=$true}; Stop-Transcript | Out-Null; if($failed){throw 'Flutter retest failed; inspect the saved transcript.'}
+Process ID: 17872
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26300
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+
+RETEST after correcting working directory
+[3R] Flutter static analysis from frontend
+
+
+[4R] Flutter baseline tests from frontend
+
+**********************
+PowerShell transcript end
+End time: 20261029221402
+**********************
+
+ACTUAL OUTPUT RETEST 2026-10-29T22:14:26.4351633+08:00
+
+[1R] php artisan migrate:status
+
+  Migration name ...................................................................................... Batch / Status
+  0001_01_01_000000_create_users_table ....................................................................... [1] Ran
+  0001_01_01_000001_create_cache_table ....................................................................... [1] Ran
+  0001_01_01_000002_create_jobs_table ........................................................................ [1] Ran
+
+
+[2R] php artisan test
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                            0.01s
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                                                0.26s
+
+  Tests:    2 passed (2 assertions)
+  Duration: 0.52s
+
+
+[3R] flutter analyze
+Analyzing frontend...
+No issues found! (ran in 2.0s)
+
+[4R] flutter test
+00:00 +0: loading C:/Users/Admin/Documents/IPT/student-clearance-week13/frontend/test/widget_test.dart
+00:00 +0: Counter increments smoke test
+00:00 +1: All tests passed!
+
+Exit codes: migrate=0 laravel_test=0 flutter_analyze=0 flutter_test=0
