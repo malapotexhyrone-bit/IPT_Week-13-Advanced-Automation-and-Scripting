@@ -28,11 +28,11 @@ Laravel 12 is used because it supports the installed PHP 8.2 runtime. Laravel 13
 
 ## Architecture and controls
 
-The approved design is hybrid: transactional office-task creation, scheduled reminders and stalled-step escalation, and event-driven completion notification. The implementation will use database-backed queues, idempotency keys, unique constraints, bounded retry, after-commit dispatch, correlation identifiers, and permanent-failure routing.
+The approved design is hybrid: transactional office-task creation, scheduled reminders and stalled-step escalation, and event-driven completion notification. Checkpoint 2 implements Sanctum authentication, student-role authorization, transactional task creation, unique student-term and clearance-office guards, hashed idempotency keys, and correlation identifiers. Database-backed automation, bounded retry, after-commit dispatch, and permanent-failure routing remain later Week 13 checkpoints.
 
 ## Verification status
 
-Framework scaffolds and baseline tests are the only verified behavior at Checkpoint 1. Workflow claims remain pending until the relevant code and tests exist. Actual command output and screenshots are indexed under `evidence/`.
+Checkpoint 1 verified the framework baseline. Checkpoint 2 verifies the first workflow slice with seven feature cases: successful initiation, unauthenticated access, wrong role, missing term, inactive term, duplicate submission, and unavailable office configuration. The full suite passes 9 tests and 36 assertions, and the MariaDB migrations and fictional seeder ran successfully. Office decisions, Flutter integration, and automation failure recovery remain pending. Actual command output and screenshots are indexed under `evidence/`.
 
 ## Known limitations
 

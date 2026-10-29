@@ -1,16 +1,28 @@
-# Draft API Contract
+# API Contract
 
-The contract is a design artifact at Checkpoint 1. Routes and schemas become authoritative only after implementation and automated contract tests.
+Only routes marked implemented are authoritative at Checkpoint 2. Planned routes remain design targets until their code and automated tests exist.
 
-| Method and path | Authorized actor | Purpose | Key outcomes |
-| --- | --- | --- | --- |
-| `POST /api/v1/clearances` | Student | Initiate one clearance for the controlled term | `201`, `409` duplicate, `422` invalid, `401` unauthenticated |
-| `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance | `200`, `404`, `401` |
-| `POST /api/v1/office-tasks/{task}/deficiencies` | Assigned office personnel | Record a deficiency | `201`, `403`, `409` invalid state, `422` invalid |
-| `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note | `200`, `403`, `409`, `422` |
-| `POST /api/v1/office-tasks/{task}/approve` | Assigned office personnel | Approve an eligible office task | `200`, `403`, `409`, `422` |
-| `GET /api/v1/admin/automation-failures` | Administrator | List stalled or permanently failed automation | `200`, `403` |
-| `POST /api/v1/admin/automation-failures/{failure}/retry` | Administrator | Retry an eligible failed item | `202`, `403`, `409` |
+| Status | Method and path | Authorized actor | Purpose | Key outcomes |
+| --- | --- | --- | --- | --- |
+| Implemented | `POST /api/v1/clearances` | Student | Initiate one clearance and create one task per active office | `201`, `409` duplicate, `422` invalid, `401` unauthenticated, `403` wrong role, `503` no active offices |
+| Planned | `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance | `200`, `404`, `401` |
+| Planned | `POST /api/v1/office-tasks/{task}/deficiencies` | Assigned office personnel | Record a deficiency | `201`, `403`, `409` invalid state, `422` invalid |
+| Planned | `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note | `200`, `403`, `409`, `422` |
+| Planned | `POST /api/v1/office-tasks/{task}/approve` | Assigned office personnel | Approve an eligible office task | `200`, `403`, `409`, `422` |
+| Planned | `GET /api/v1/admin/automation-failures` | Administrator | List stalled or permanently failed automation | `200`, `403` |
+| Planned | `POST /api/v1/admin/automation-failures/{failure}/retry` | Administrator | Retry an eligible failed item | `202`, `403`, `409` |
+
+## Implemented clearance initiation
+
+Request body:
+
+```json
+{
+  "term_code": "2026-2027-1"
+}
+```
+
+The optional `Idempotency-Key` header must be 8 to 100 safe ASCII characters. The server stores only its SHA-256 hash. A successful response includes the clearance, active academic term, and pending office tasks. The database transaction creates the clearance, all tasks, and the `clearance_initiated` event together or creates none of them.
 
 ## Common request rules
 

@@ -6,6 +6,8 @@ Every entry must reference a real saved artifact. Labels are stable and are used
 | --- | --- | --- | --- |
 | EVID-W13-SETUP-001 | `screenshots/setup/EVID-W13-SETUP-001-vscode-project-structure.png` | Real VS Code view of the saved Week 13 repository structure | complete |
 | EVID-W13-SETUP-002 | `test-results/EVID-W13-SETUP-002-baseline-tests.txt` | Executed Laravel and Flutter baseline verification, including retained wrong-directory failure and corrected retest | complete |
+| EVID-W13-DATA-001 | `test-results/EVID-W13-DATA-001-clearance-initiation-tests.txt` | Executed success and adverse-path tests plus local MariaDB migration and fictional-data verification | complete |
+| EVID-W13-CODE-002 | `screenshots/source-code/EVID-W13-CODE-002-clearance-initiation-vscode.jpg` | Real VS Code view of the transactional clearance-initiation service with duplicate guard and line numbers visible | complete |
 | EVID-W13-CODE-001 | `screenshots/source-code/EVID-W13-CODE-001-retry-policy-vscode.png` | Saved source implementing bounded retry | pending implementation |
 | EVID-W13-APP-001 | `screenshots/application/EVID-W13-APP-001-student-normal-path.png` | Real Flutter normal path | pending implementation |
 | EVID-W13-APP-002 | `screenshots/application/EVID-W13-APP-002-validation-state.png` | Real Flutter validation state | pending implementation |

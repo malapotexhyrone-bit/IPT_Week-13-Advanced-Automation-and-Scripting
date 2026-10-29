@@ -5,13 +5,22 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
+    public const ROLE_STUDENT = 'student';
+
+    public const ROLE_OFFICE = 'office';
+
+    public const ROLE_ADMIN = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +30,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
+        'office_id',
         'password',
     ];
 
@@ -45,5 +56,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function office(): BelongsTo
+    {
+        return $this->belongsTo(Office::class);
+    }
+
+    public function clearances(): HasMany
+    {
+        return $this->hasMany(Clearance::class, 'student_id');
     }
 }

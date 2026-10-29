@@ -1,0 +1,48 @@
+EVID-W13-DATA-001 - Clearance initiation tests and MariaDB verification
+Date: 30 October 2026 (Asia/Manila)
+Environment: Laravel 12.70.2, PHP 8.2.12, isolated SQLite in-memory tests, local XAMPP MariaDB 10.4.32
+Build: Checkpoint 2 working tree before student approval
+Data: Fictional controlled records only
+
+Command: php artisan test
+
+PASS Tests\Unit\ExampleTest
+PASS Tests\Feature\ClearanceInitiationTest
+  PASS student can initiate clearance and create one task per active office
+  PASS request requires authentication
+  PASS office user cannot initiate student clearance
+  PASS invalid request creates no partial records
+  PASS inactive term is rejected
+  PASS duplicate term is rejected without duplicate tasks
+  PASS missing active offices returns safe unavailable response
+PASS Tests\Feature\ExampleTest
+
+Result: 9 tests passed, 36 assertions, 0 failures.
+
+Expected-versus-actual summary:
+1. Valid authenticated student request -> expected 201, one clearance, one task per active office, and one correlated event; actual PASS.
+2. Missing authentication -> expected 401 and no clearance; actual PASS.
+3. Authenticated office user -> expected 403 and no clearance; actual PASS.
+4. Missing term code -> expected 422 and no partial records; actual PASS.
+5. Inactive term -> expected 422 and no clearance; actual PASS.
+6. Repeated student-term request -> expected 409 with one original clearance and no duplicate tasks or events; actual PASS.
+7. No active offices -> expected safe 503 response for human handling and no partial records; actual PASS.
+
+Command: php artisan migrate --seed --force
+Actual: Four Checkpoint 2 workflow migrations ran successfully and the fictional seed completed.
+
+MariaDB seed count verification:
+- Offices: 4
+- Academic terms: 1
+- Users: 3
+- Roles present: admin, office, student
+
+Command: php artisan route:list --path=api/v1
+Actual: POST api/v1/clearances -> Api\V1\ClearanceController@store
+
+Command: php artisan migrate:status
+Actual: All eight migrations report Ran, including Sanctum and the four workflow migrations.
+
+Limitations:
+- This evidence verifies the clearance-initiation slice only.
+- Office decisions, deficiencies, completion, reminders, escalation, retry recovery, permanent failure handling, and Flutter integration are not yet implemented.

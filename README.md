@@ -4,7 +4,7 @@ This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is
 
 ## Current status
 
-Checkpoint 1 establishes the approved technical baseline. The Laravel 12 backend and Flutter Web frontend are scaffolded, the local MariaDB database is identified, and the Week 13 workflow decisions are documented. Business features remain pending until later checkpoints.
+Checkpoint 2 implements the first bounded workflow slice. The Laravel API now authenticates with Sanctum, enforces the student role, validates clearance initiation, creates one task per active office in a transaction, records a correlated audit event, and rejects duplicate or unavailable configurations without partial records. Flutter workflow screens and the remaining office, automation, and recovery paths are still pending.
 
 ## Approved stack
 
@@ -36,7 +36,7 @@ evidence/
 2. Create a controlled local database named `student_clearance_week13`.
 3. In `backend`, copy `.env.example` to `.env` and run `php artisan key:generate`.
 4. Keep local credentials only in `.env`; never commit that file.
-5. Run `composer install`, then `php artisan migrate` after migrations are introduced.
+5. Run `composer install`, then `php artisan migrate --seed` to create the schema and fictional demonstration records.
 6. Start the API with `php artisan serve --host=127.0.0.1 --port=8000`.
 7. In `frontend`, run `flutter pub get`.
 8. Start Flutter Web with `flutter run -d chrome --web-port=7357`.
@@ -52,7 +52,7 @@ flutter analyze
 flutter test
 ```
 
-Later checkpoints will add workflow tests for success, invalid input, unauthorized and forbidden actions, unavailable dependencies, recovered transient failure, duplicate protection, and permanent failure routed for human action.
+The implemented clearance-initiation tests cover success, invalid input, unauthenticated access, wrong-role access, inactive terms, duplicate prevention, and missing-office recovery routing. Later checkpoints add office decisions, notifications, recovered transient failure, and permanent failure routed for human action.
 
 ## Data and safety
 
