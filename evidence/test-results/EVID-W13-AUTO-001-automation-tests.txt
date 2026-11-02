@@ -1,0 +1,25 @@
+EVID-W13-AUTO-001 — Week 13 automation verification
+Executed: 2026-11-02, Asia/Manila
+Environment: Laravel 12 / PHP 8.2 / isolated test database
+Command: php artisan test
+
+Focused automation cases:
+PASS scan creates one reminder and does not duplicate it
+PASS overdue task creates reminder and stalled escalation
+PASS successful delivery records one attempt and applies reminder effect
+PASS transient failure recovers within bounded retry without duplicate effect
+PASS repeated transient failure stops after three attempts and routes human action
+PASS non retryable failure routes human action immediately
+PASS completed clearance has one completion notification record
+PASS only admin can inspect failures
+PASS admin retry preserves history and grants one new bounded cycle
+PASS admin cannot retry a non retryable failure
+
+Full regression result:
+Tests: 28 passed (117 assertions)
+Duration: 1.23s
+
+Expected: reminders, escalation, completion notification, bounded recovery,
+permanent failure routing, authorization, and duplicate protection all pass
+without regressing earlier workflow behavior.
+Actual: expected result observed. Outcome: PASS.

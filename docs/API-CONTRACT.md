@@ -1,6 +1,6 @@
 # API Contract
 
-Only routes marked implemented are authoritative at Checkpoint 3. Planned routes remain design targets until their code and automated tests exist.
+Only routes marked implemented are authoritative. Planned routes remain design targets until their code and automated tests exist.
 
 | Status | Method and path | Authorized actor | Purpose | Key outcomes |
 | --- | --- | --- | --- | --- |
@@ -9,8 +9,12 @@ Only routes marked implemented are authoritative at Checkpoint 3. Planned routes
 | Implemented | `POST /api/v1/office-tasks/{officeTask}/deficiencies` | Assigned office personnel | Record one open deficiency and move the task to `deficiency` | `201`, `403`, `409` invalid state, `422` invalid |
 | Implemented | `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note and move the task to `awaiting_re_review` | `200`, `403`, `409`, `422` |
 | Implemented | `POST /api/v1/office-tasks/{officeTask}/approve` | Assigned office personnel | Approve a pending or re-review task; complete the clearance after the final approval | `200`, `403`, `409` |
-| Planned | `GET /api/v1/admin/automation-failures` | Administrator | List stalled or permanently failed automation | `200`, `403` |
-| Planned | `POST /api/v1/admin/automation-failures/{failure}/retry` | Administrator | Retry an eligible failed item | `202`, `403`, `409` |
+| Implemented | `GET /api/v1/automation/failures` | Administrator | List automation items requiring human action without exposing message bodies or student details | `200`, `403` |
+| Implemented | `POST /api/v1/automation/deliveries/{automationDelivery}/retry` | Administrator | Retry an eligible transient failure while preserving earlier attempts and adding one bounded cycle | `202`, `403`, `409` |
+
+## Implemented automation controls
+
+The scheduler creates daily reminder effects, one stalled-task escalation, and one completion notification using unique database idempotency keys. Each delivery records up to three attempts with exponential classroom backoff. An exhausted retryable failure or a non-retryable adapter response creates one human-action item. Only an administrator can inspect those items or request an eligible retry. The retry retains the attempt history and extends the limit by exactly three attempts rather than creating an unbounded loop.
 
 ## Implemented clearance initiation
 

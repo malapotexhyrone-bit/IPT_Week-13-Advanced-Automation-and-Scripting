@@ -1,0 +1,2 @@
+{"label":"EVID-W13-FAIL-001","environment":"testing","event":"automation.delivery_outcome","delivery_id":1,"automation_type":"office_task_reminder","attempt":1,"outcome":"retry_scheduled","error_code":"ADAPTER_TEMPORARILY_UNAVAILABLE","correlation_id":"01M6DFT6JRVW3HGAYNWVAZNAQS"}
+{"label":"EVID-W13-FAIL-001","environment":"testing","event":"automation.delivery_outcome","delivery_id":1,"automation_type":"office_task_reminder","attempt":2,"outcome":"delivered","correlation_id":"01M6DFT6JRVW3HGAYNWVAZNAQS"}

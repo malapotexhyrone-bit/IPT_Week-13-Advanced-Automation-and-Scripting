@@ -18,7 +18,12 @@
 - Assigned-office deficiency reporting and approval APIs plus owning-student resolution API.
 - Transactional task state transitions, correlated audit events, and single final clearance completion.
 - Nine office-workflow feature tests covering normal, unauthorized, invalid, and completion paths.
+- Scheduled office reminders, stalled-task escalation, and idempotent completion-notification records.
+- Database-backed delivery attempts with structured safe logs, bounded backoff, and duplicate-effect guards.
+- Controlled transient recovery and permanent-failure routing to a human-action item.
+- Administrator-only failure inspection and eligible manual retry with preserved history.
+- Ten automation feature tests; the full regression suite now passes 28 tests and 117 assertions.
 
 ### Not yet implemented
 
-- Automation jobs, Flutter workflow screens, failure injection, and final evidence.
+- Flutter workflow screens and final consolidated evidence.

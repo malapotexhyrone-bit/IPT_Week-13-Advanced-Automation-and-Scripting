@@ -4,7 +4,7 @@ This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is
 
 ## Current status
 
-Checkpoint 3 implements the bounded clearance lifecycle through overall completion. The Laravel API authenticates with Sanctum, validates clearance initiation, creates one task per active office, restricts reviews to the assigned office, lets only the owning student resolve a deficiency, blocks invalid transitions, and completes the clearance after every task is approved. Each accepted transition is transactional and correlated. Flutter workflow screens and the Week 13 reminder, escalation, retry, recovery, and notification automation remain pending.
+Checkpoint 4 implements the bounded Laravel workflow and its automation. It creates idempotent reminders, escalates overdue tasks, records one completion notification, retries transient adapter failures up to three times, and routes exhausted or permanent failures to an administrator. Administrator inspection and eligible recovery are role-protected and preserve attempt history. Flutter workflow screens remain the next checkpoint.
 
 ## Approved stack
 
@@ -52,7 +52,7 @@ flutter analyze
 flutter test
 ```
 
-The implemented tests cover clearance initiation plus office deficiency reporting, student resolution, re-review, approval, completion, validation, wrong-role access, wrong-office access, wrong-student access, duplicate prevention, invalid transitions, and unavailable configuration. Later checkpoints add Flutter integration, notifications, recovered transient failure, and permanent failure routed for human action.
+The 28 implemented tests (117 assertions) cover clearance initiation, office deficiency reporting, student resolution, re-review, approval, completion, validation, authorization, duplicate prevention, reminders, escalation, completion notification, recovered transient failure, exhausted retry, human-action routing, and administrator recovery. The next checkpoint adds Flutter integration and real browser evidence.
 
 ## Data and safety
 

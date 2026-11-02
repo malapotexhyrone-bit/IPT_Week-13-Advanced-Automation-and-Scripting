@@ -154,6 +154,8 @@ class OfficeTaskWorkflowService
                     'metadata' => ['approved_task_count' => $clearance->officeTasks()->count()],
                     'occurred_at' => now(),
                 ]);
+
+                app(ClearanceAutomationService::class)->completionDelivery($clearance);
             }
 
             return $task->fresh(['office', 'clearance']);
