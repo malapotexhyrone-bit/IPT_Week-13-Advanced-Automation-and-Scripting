@@ -5,12 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class OfficeTask extends Model
 {
     use HasFactory;
 
     public const STATUS_PENDING = 'pending';
+
+    public const STATUS_DEFICIENCY = 'deficiency';
+
+    public const STATUS_AWAITING_RE_REVIEW = 'awaiting_re_review';
+
+    public const STATUS_APPROVED = 'approved';
 
     protected $fillable = [
         'clearance_id',
@@ -41,5 +48,10 @@ class OfficeTask extends Model
     public function office(): BelongsTo
     {
         return $this->belongsTo(Office::class);
+    }
+
+    public function deficiencies(): HasMany
+    {
+        return $this->hasMany(Deficiency::class);
     }
 }

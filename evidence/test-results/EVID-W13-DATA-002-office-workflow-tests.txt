@@ -1,0 +1,40 @@
+EVID-W13-DATA-002 - Office review and deficiency workflow tests
+Date: 2026-11-02 (Asia/Manila)
+Environment: Laravel 12 / PHP 8.2 / isolated RefreshDatabase test database
+Build state: Checkpoint 3 local changes, not yet committed
+
+Command:
+php artisan test tests\Feature\OfficeTaskWorkflowTest.php
+
+Result:
+PASS Tests\Feature\OfficeTaskWorkflowTest
+- assigned office can report a deficiency
+- office cannot review another office's task
+- deficiency description is validated
+- owning student can resolve an open deficiency
+- another student cannot resolve the deficiency
+- resolved deficiency cannot be resolved twice
+- task with open deficiency cannot be approved
+- approving every task completes clearance once
+- student role cannot approve an office task
+
+Tests: 9 passed (38 assertions)
+Exit code: 0
+
+Regression command:
+php artisan test
+
+Regression result:
+Tests: 18 passed (74 assertions)
+Duration reported by runner: 1.44s
+Exit code: 0
+
+Additional verification:
+- vendor\bin\pint -> passed
+- composer audit --no-interaction -> no security vulnerability advisories found
+- git diff --check -> passed; only line-ending conversion notices were reported
+- hard-coded credential and private-key pattern scan -> no matches found
+- php artisan migrate --force -> 2026_11_02_000500_create_deficiencies_table ran successfully on controlled local MariaDB
+
+Interpretation:
+The controlled tests verify the normal deficiency-resolution-re-review path, office and student ownership boundaries, validation, invalid state protection, and transactional overall completion. This artifact does not prove the Flutter interface or Week 13 reminder/retry automation, which remain separate checkpoints.

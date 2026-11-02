@@ -14,7 +14,11 @@
 - Fictional seed records for four clearing offices, one active term, and the three bounded roles.
 - Transactional `POST /api/v1/clearances` with validation, correlation identifiers, idempotency-key hashing, duplicate protection, and safe errors.
 - Seven clearance-initiation feature tests covering the normal path and six adverse paths.
+- Deficiency records with open/resolved states and controlled resolution notes.
+- Assigned-office deficiency reporting and approval APIs plus owning-student resolution API.
+- Transactional task state transitions, correlated audit events, and single final clearance completion.
+- Nine office-workflow feature tests covering normal, unauthorized, invalid, and completion paths.
 
 ### Not yet implemented
 
-- Office review and deficiency workflow, automation jobs, Flutter workflow screens, failure injection, and final evidence.
+- Automation jobs, Flutter workflow screens, failure injection, and final evidence.

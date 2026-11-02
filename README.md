@@ -4,7 +4,7 @@ This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is
 
 ## Current status
 
-Checkpoint 2 implements the first bounded workflow slice. The Laravel API now authenticates with Sanctum, enforces the student role, validates clearance initiation, creates one task per active office in a transaction, records a correlated audit event, and rejects duplicate or unavailable configurations without partial records. Flutter workflow screens and the remaining office, automation, and recovery paths are still pending.
+Checkpoint 3 implements the bounded clearance lifecycle through overall completion. The Laravel API authenticates with Sanctum, validates clearance initiation, creates one task per active office, restricts reviews to the assigned office, lets only the owning student resolve a deficiency, blocks invalid transitions, and completes the clearance after every task is approved. Each accepted transition is transactional and correlated. Flutter workflow screens and the Week 13 reminder, escalation, retry, recovery, and notification automation remain pending.
 
 ## Approved stack
 
@@ -52,7 +52,7 @@ flutter analyze
 flutter test
 ```
 
-The implemented clearance-initiation tests cover success, invalid input, unauthenticated access, wrong-role access, inactive terms, duplicate prevention, and missing-office recovery routing. Later checkpoints add office decisions, notifications, recovered transient failure, and permanent failure routed for human action.
+The implemented tests cover clearance initiation plus office deficiency reporting, student resolution, re-review, approval, completion, validation, wrong-role access, wrong-office access, wrong-student access, duplicate prevention, invalid transitions, and unavailable configuration. Later checkpoints add Flutter integration, notifications, recovered transient failure, and permanent failure routed for human action.
 
 ## Data and safety
 

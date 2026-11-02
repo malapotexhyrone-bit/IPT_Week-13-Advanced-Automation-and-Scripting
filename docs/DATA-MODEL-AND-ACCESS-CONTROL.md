@@ -1,16 +1,16 @@
 # Clearance Data Model and Access Control
 
-## Checkpoint 2 boundary
+## Checkpoint 3 boundary
 
-This checkpoint implements only authenticated clearance initiation. It prepares the records needed by later office review and automation without implementing those later actions early.
+This checkpoint implements authenticated clearance initiation, assigned-office review, deficiency resolution by the owning student, task approval, and overall completion. Reminder, escalation, retry, recovery, notification, and Flutter integration remain later Week 13 checkpoints.
 
 ## Role boundary
 
 | Role | Implemented permission | Server-side control |
 | --- | --- | --- |
-| Student | Initiate one clearance for one active term | Sanctum authentication plus `role:student` middleware |
-| Clearing-office personnel | No initiation permission | Request is rejected with `403 ROLE_FORBIDDEN` |
-| Authorized administrator | No initiation permission | Request is rejected with `403 ROLE_FORBIDDEN` |
+| Student | Initiate own clearance and resolve deficiencies belonging to it | Sanctum, `role:student`, and server-side clearance ownership check |
+| Clearing-office personnel | Report deficiencies and approve tasks assigned to their office | Sanctum, `role:office`, and server-side `office_id` match |
+| Authorized administrator | No review mutation at this checkpoint; later human-action oversight only | Review routes reject the role with `403 ROLE_FORBIDDEN` |
 
 The API never accepts a role, student identifier, or office assignment from the Flutter request. It derives identity and role from the authenticated Laravel user.
 
@@ -22,6 +22,8 @@ erDiagram
     ACADEMIC_TERMS ||--o{ CLEARANCES : groups
     CLEARANCES ||--|{ OFFICE_TASKS : creates
     OFFICES ||--o{ OFFICE_TASKS : owns
+    OFFICE_TASKS ||--o{ DEFICIENCIES : contains
+    USERS ||--o{ DEFICIENCIES : reports
     CLEARANCES ||--o{ CLEARANCE_EVENTS : records
     USERS ||--o{ CLEARANCE_EVENTS : acts
 ```
@@ -31,7 +33,12 @@ erDiagram
 - `users.role` defines the bounded role, while `users.office_id` restricts future office personnel to one office.
 - `clearances` has unique student-term and student-idempotency-hash guards.
 - `office_tasks` has one unique clearance-office pair, preventing duplicate office work.
+- `deficiencies` preserves the office description, status, student resolution note, reporter, and resolution time. Only one open deficiency is allowed by the workflow service for a task.
 - `clearance_events` records the initiating actor, event type, correlation identifier, controlled metadata, and timestamp.
+
+## Review transaction behavior
+
+The workflow service locks the affected task or deficiency before checking its current state. Accepted changes update the task and deficiency and append a correlated event in one transaction. Approval is allowed only from `pending` or `awaiting_re_review`. After each approval, the service locks the parent clearance and marks it completed only when no unapproved tasks remain. A `clearance_completed` event is therefore created once at the final approval boundary.
 
 ## Transaction and recovery behavior
 

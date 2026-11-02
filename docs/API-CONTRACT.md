@@ -1,14 +1,14 @@
 # API Contract
 
-Only routes marked implemented are authoritative at Checkpoint 2. Planned routes remain design targets until their code and automated tests exist.
+Only routes marked implemented are authoritative at Checkpoint 3. Planned routes remain design targets until their code and automated tests exist.
 
 | Status | Method and path | Authorized actor | Purpose | Key outcomes |
 | --- | --- | --- | --- | --- |
 | Implemented | `POST /api/v1/clearances` | Student | Initiate one clearance and create one task per active office | `201`, `409` duplicate, `422` invalid, `401` unauthenticated, `403` wrong role, `503` no active offices |
 | Planned | `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance | `200`, `404`, `401` |
-| Planned | `POST /api/v1/office-tasks/{task}/deficiencies` | Assigned office personnel | Record a deficiency | `201`, `403`, `409` invalid state, `422` invalid |
-| Planned | `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note | `200`, `403`, `409`, `422` |
-| Planned | `POST /api/v1/office-tasks/{task}/approve` | Assigned office personnel | Approve an eligible office task | `200`, `403`, `409`, `422` |
+| Implemented | `POST /api/v1/office-tasks/{officeTask}/deficiencies` | Assigned office personnel | Record one open deficiency and move the task to `deficiency` | `201`, `403`, `409` invalid state, `422` invalid |
+| Implemented | `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note and move the task to `awaiting_re_review` | `200`, `403`, `409`, `422` |
+| Implemented | `POST /api/v1/office-tasks/{officeTask}/approve` | Assigned office personnel | Approve a pending or re-review task; complete the clearance after the final approval | `200`, `403`, `409` |
 | Planned | `GET /api/v1/admin/automation-failures` | Administrator | List stalled or permanently failed automation | `200`, `403` |
 | Planned | `POST /api/v1/admin/automation-failures/{failure}/retry` | Administrator | Retry an eligible failed item | `202`, `403`, `409` |
 
@@ -23,6 +23,18 @@ Request body:
 ```
 
 The optional `Idempotency-Key` header must be 8 to 100 safe ASCII characters. The server stores only its SHA-256 hash. A successful response includes the clearance, active academic term, and pending office tasks. The database transaction creates the clearance, all tasks, and the `clearance_initiated` event together or creates none of them.
+
+## Implemented office review state transitions
+
+The server derives the reviewer's office and the student's clearance ownership from the authenticated user. It never accepts an office, reviewer, student, task status, or clearance status from the client.
+
+```text
+pending -> deficiency -> awaiting_re_review -> approved
+pending -------------------------------------> approved
+all office tasks approved -> clearance completed
+```
+
+A deficiency request requires a 5-to-1000-character `description`. A resolution requires a 5-to-1000-character `resolution_note`. An office cannot review another office's task, another student cannot resolve the owning student's deficiency, an open deficiency blocks approval, and a completed approval cannot be repeated. Each accepted transition and final completion writes a correlated audit event in the same database transaction.
 
 ## Common request rules
 

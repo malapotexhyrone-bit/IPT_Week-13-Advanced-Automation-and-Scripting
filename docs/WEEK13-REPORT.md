@@ -28,11 +28,11 @@ Laravel 12 is used because it supports the installed PHP 8.2 runtime. Laravel 13
 
 ## Architecture and controls
 
-The approved design is hybrid: transactional office-task creation, scheduled reminders and stalled-step escalation, and event-driven completion notification. Checkpoint 2 implements Sanctum authentication, student-role authorization, transactional task creation, unique student-term and clearance-office guards, hashed idempotency keys, and correlation identifiers. Database-backed automation, bounded retry, after-commit dispatch, and permanent-failure routing remain later Week 13 checkpoints.
+The approved design is hybrid: transactional office-task creation and review, scheduled reminders and stalled-step escalation, and event-driven completion notification. Checkpoint 3 implements Sanctum authentication, role and ownership authorization, transactional task creation, deficiency reporting and resolution, office approval, overall completion, unique guards, hashed idempotency keys, and correlation identifiers. Database-backed automation, bounded retry, after-commit dispatch, and permanent-failure routing remain later Week 13 checkpoints.
 
 ## Verification status
 
-Checkpoint 1 verified the framework baseline. Checkpoint 2 verifies the first workflow slice with seven feature cases: successful initiation, unauthenticated access, wrong role, missing term, inactive term, duplicate submission, and unavailable office configuration. The full suite passes 9 tests and 36 assertions, and the MariaDB migrations and fictional seeder ran successfully. Office decisions, Flutter integration, and automation failure recovery remain pending. Actual command output and screenshots are indexed under `evidence/`.
+Checkpoint 1 verified the framework baseline. Checkpoint 2 verified clearance initiation. Checkpoint 3 adds nine focused office-workflow tests covering deficiency reporting, assigned-office isolation, validation, owning-student resolution, cross-student denial, repeat-resolution denial, open-deficiency approval denial, final completion, and wrong-role denial. The complete Laravel suite passes 18 tests and 74 assertions. Flutter integration and automation failure recovery remain pending. Actual command output and screenshots are indexed under `evidence/`.
 
 ## Known limitations
 

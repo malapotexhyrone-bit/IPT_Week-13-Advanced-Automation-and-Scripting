@@ -32,4 +32,14 @@ class ClearanceEvent extends Model
     {
         return $this->belongsTo(Clearance::class);
     }
+
+    public function officeTask(): BelongsTo
+    {
+        return $this->belongsTo(OfficeTask::class);
+    }
+
+    public function actor(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'actor_user_id');
+    }
 }
