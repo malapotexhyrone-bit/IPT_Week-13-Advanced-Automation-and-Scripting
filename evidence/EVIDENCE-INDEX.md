@@ -30,4 +30,9 @@ Every entry must reference a real saved artifact. Labels are stable and are used
 
 Screenshots support but do not replace source, saved test output, logs, expected-versus-actual records, or explanations.
 
-The primary labeled screenshot journey is maintained outside the Git repository at `C:\Users\Admin\Documents\IPT\Evidence Document\Week-13-Screenshot-Journey-and-Evidence.docx`.
+The primary labeled screenshot journey is maintained outside the Git repository in both formats:
+
+- `C:\Users\Admin\Documents\IPT\Evidence Document\Week-13-Screenshot-Journey-and-Evidence.docx`
+- `C:\Users\Admin\Documents\IPT\Evidence Document\Week-13-Screenshot-Journey-and-Evidence.pdf`
+
+The matching files contain 26 visually verified pages and 16 embedded media items. They consolidate the requirements map, architecture, activities, implementation, chronological creation steps, tests, controlled failures, recovery, Git checkpoint journey, setup, limitations, and defense preparation. They are external submission artifacts and are not part of a repository push.

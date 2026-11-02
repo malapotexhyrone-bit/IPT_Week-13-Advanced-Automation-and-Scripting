@@ -10,6 +10,8 @@ Status values are `complete`, `pending`, or `blocked`.
 | Laravel API source | complete | Clearance workflow plus administrator automation inspection/retry endpoints are implemented and tested. |
 | MariaDB/MySQL configuration example | complete | `backend/.env.example`; no secret is included. |
 | Workflow boundary and non-goals | complete | `docs/PROJECT-SCOPE.md` |
+| Data flow and trust boundaries | complete | `docs/SYSTEM-DATA-FLOW-AND-TRUST-BOUNDARIES.md` identifies the public client, trusted API, SQL records, queue, bounded gateway, logs, and human-action boundary. |
+| Measurable acceptance criteria | complete | `docs/ACCEPTANCE-CRITERIA.md` maps normal, adverse, recovery, automation, and responsive outcomes to evidence. |
 | Trigger and execution decision | complete | `docs/ARCHITECTURE-DECISION-001.md` |
 | Activity 1 comparison and interpretation | complete | `docs/ACTIVITY-1-TRIGGER-PATTERNS.md` |
 | Flutter screen-flow diagram | complete | `docs/FLUTTER-SCREEN-FLOW.md` matches the implemented role-based UI. |
@@ -25,7 +27,8 @@ Status values are `complete`, `pending`, or `blocked`.
 | Desktop and narrow Flutter evidence | complete | EVID-W13-APP-001 through APP-007 include real desktop workflow states and a 502-pixel-wide completed view. |
 | Activity 2 failure-injection record | complete | `docs/ACTIVITY-2-CONTROLLED-FAILURE.md` plus labeled logs and tests. |
 | SA7 portfolio and maintainability evaluation | complete | `docs/WEEK13-REPORT.md` maps the automation case, laboratory evidence, maintainability evaluation, limitations, and references to the verified build. |
-| Chronological screenshot evidence document | complete | `C:\Users\Admin\Documents\IPT\Evidence Document\Week-13-Screenshot-Journey-and-Evidence.docx` contains 19 visually verified pages with labeled VS Code, Flutter, test, recovery, and Git-push evidence. The central file is intentionally outside this repository. |
+| Security and observability review | complete | `docs/SECURITY-OBSERVABILITY-CHECKLIST.md` records verified controls, residual limits, signals, and future operational work. |
+| Consolidated documentation and screenshot journey | complete | The central `Week-13-Screenshot-Journey-and-Evidence.docx` and matching PDF contain 26 visually verified pages, 16 embedded media files, labeled chronological VS Code/Flutter/test evidence, requirements mapping, creation steps, Git history, limitations, and defense preparation. Both central files are intentionally outside this repository. |
 | Defense walkthrough | complete | `docs/DEFENSE-WALKTHROUGH.md` provides a bounded live-demonstration flow, likely defense questions, and a student verification checklist. |
 | Reflection and individual contribution | pending | The report contains a reflection worksheet, but the student must personalize it and verify the explanation in their own words. |
-| Checkpoint commits and pushes | complete | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), 5 (`a31c831`), and 6 (`34d1a58`) are pushed. The student approved the final documentation checkpoint represented by the current repository HEAD for push to `origin/main`. |
+| Checkpoint commits and pushes | complete | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), 5 (`a31c831`), 6 (`34d1a58`), and 7 (`6c3b5a7`) are pushed. The current documentation-correction checkpoint remains local until student approval. |

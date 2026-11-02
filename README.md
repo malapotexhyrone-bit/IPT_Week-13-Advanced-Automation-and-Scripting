@@ -4,7 +4,9 @@ This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is
 
 ## Current status
 
-Checkpoint 5 connects a responsive Flutter Web interface to the bounded Laravel workflow and its SQL-backed records. Students can initiate clearance and resolve deficiencies, assigned office personnel can report deficiencies or approve tasks, and administrators can inspect and retry eligible automation failures. Loading, empty, validation, unavailable-service, and unauthorized states are explicit. The local-only demo-session route uses fictional seeded users and is disabled unless the controlled demo environment permits it.
+Week 13 is technically complete at commit `6c3b5a7`. The responsive Flutter Web interface is connected to the bounded Laravel workflow and its SQL-backed records. Students can initiate clearance and resolve deficiencies, assigned office personnel can report deficiencies or approve tasks, and administrators can inspect and retry eligible automation failures. Loading, empty, validation, unavailable-service, unauthorized, deficiency, re-review, completion, and responsive states are preserved in the evidence journey. The local-only demo-session route uses fictional seeded users and is disabled unless the controlled demo environment permits it.
+
+The remaining student-owned work is to personalize the reflection, reproduce the checks, rehearse the defense walkthrough, and confirm the instructor's submission format. No instructor grade, stakeholder approval, production readiness, or completed oral defense is claimed.
 
 ## Approved stack
 
