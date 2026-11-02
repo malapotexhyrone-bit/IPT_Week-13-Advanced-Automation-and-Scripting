@@ -14,11 +14,14 @@ Every entry must reference a real saved artifact. Labels are stable and are used
 | EVID-W13-AUTO-001 | `test-results/EVID-W13-AUTO-001-automation-tests.txt` | Executed reminder, escalation, completion, retry, human-action, authorization, and idempotency tests; full regression 28 tests / 117 assertions | complete |
 | EVID-W13-CODE-001 | `screenshots/source-code/EVID-W13-CODE-001-retry-policy-vscode.png` | Real VS Code view of bounded retry, safe failure classification, and permanent-failure routing with filename and line numbers | complete |
 | EVID-W13-TEST-004 | `screenshots/source-code/EVID-W13-TEST-004-automation-results-vscode.png` | Real VS Code view of the labeled automation cases and full 28-test / 117-assertion regression result | complete |
-| EVID-W13-APP-001 | `screenshots/application/EVID-W13-APP-001-student-normal-path.png` | Real Flutter normal path | pending implementation |
-| EVID-W13-APP-002 | `screenshots/application/EVID-W13-APP-002-validation-state.png` | Real Flutter validation state | pending implementation |
-| EVID-W13-APP-003 | `screenshots/application/EVID-W13-APP-003-unauthorized-state.png` | Real Flutter unauthorized or forbidden state | pending implementation |
+| EVID-W13-APP-000 | `screenshots/application/EVID-W13-APP-000-role-selection.png` | Real Flutter role-selection screen for the controlled student, office, and administrator demonstrations | complete |
+| EVID-W13-APP-001 | `screenshots/application/EVID-W13-APP-001-student-normal-path.png` | Real Flutter normal path after SQL-backed clearance creation and four office tasks | complete |
+| EVID-W13-APP-002 | `screenshots/application/EVID-W13-APP-002-validation-state.png` | Real Flutter inline rejection of an invalid academic-term code | complete |
+| EVID-W13-APP-003 | `screenshots/application/EVID-W13-APP-003-unauthorized-state.png` | Real Flutter `401` state after revoking the controlled demonstration token | complete |
+| EVID-W13-FLUTTER-001 | `test-results/EVID-W13-FLUTTER-001-integration-tests.txt` | Flutter analyzer and four widget tests plus the 32-test Laravel regression and live UI verification record | complete |
 | EVID-W13-FAIL-001 | `logs/EVID-W13-FAIL-001-transient-recovery.jsonl` | Sanitized actual test log: first attempt failed transiently and second attempt delivered with the same correlation ID | complete |
 | EVID-W13-FAIL-002 | `logs/EVID-W13-FAIL-002-permanent-human-action.jsonl` | Sanitized actual test log: three bounded failures ended in human action | complete |
+| EVID-W13-FAIL-003 | `screenshots/application/EVID-W13-FAIL-003-ui-network-state.png` | Real Flutter safe unavailable-service state observed before the localhost CORS allow-list correction | complete |
 
 Screenshots support but do not replace source, saved test output, logs, expected-versus-actual records, or explanations.
 

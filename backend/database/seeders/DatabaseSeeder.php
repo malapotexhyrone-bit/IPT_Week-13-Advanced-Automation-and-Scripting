@@ -50,15 +50,24 @@ class DatabaseSeeder extends Seeder
             ],
         );
 
-        User::query()->updateOrCreate(
-            ['email' => 'library.reviewer@example.test'],
-            [
-                'name' => 'Morgan Reyes',
-                'role' => User::ROLE_OFFICE,
-                'office_id' => $offices['LIBRARY']->id,
-                'password' => $generatedPassword,
-            ],
-        );
+        $reviewers = [
+            'REGISTRAR' => ['name' => 'Samira Flores', 'email' => 'registrar.reviewer@example.test'],
+            'LIBRARY' => ['name' => 'Morgan Reyes', 'email' => 'library.reviewer@example.test'],
+            'ACCOUNTING' => ['name' => 'Paolo Navarro', 'email' => 'accounting.reviewer@example.test'],
+            'STUDENT_AFFAIRS' => ['name' => 'Inez Villanueva', 'email' => 'student.affairs.reviewer@example.test'],
+        ];
+
+        foreach ($reviewers as $officeCode => $reviewer) {
+            User::query()->updateOrCreate(
+                ['email' => $reviewer['email']],
+                [
+                    'name' => $reviewer['name'],
+                    'role' => User::ROLE_OFFICE,
+                    'office_id' => $offices[$officeCode]->id,
+                    'password' => $generatedPassword,
+                ],
+            );
+        }
 
         User::query()->updateOrCreate(
             ['email' => 'clearance.admin@example.test'],

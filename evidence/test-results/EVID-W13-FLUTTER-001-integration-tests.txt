@@ -1,0 +1,35 @@
+EVID-W13-FLUTTER-001 - Flutter/API integration verification
+Student: Malapote, Xhyrone Wayne N.
+Section: BSIT 3-A
+Date: 2026-11-02 (Asia/Manila)
+Environment: local Flutter Web + Laravel API + controlled MariaDB database
+Base commit before Checkpoint 5: f9c1fc45e96becd62e5c6db6cae96f36cedc3b8b
+
+Automated verification
+----------------------
+1. Laravel Pint: passed.
+2. Laravel regression: 32 tests passed, 134 assertions, 1.40 seconds.
+3. Dart formatting: 10 files checked, 0 changed.
+4. Flutter analyzer: no issues found.
+5. Flutter widget tests: 4 passed.
+
+Live controlled verification
+----------------------------
+- Role selection displayed student, office, and administrator demonstrations.
+- Invalid term code was rejected inline with a safe field message.
+- Valid term 2026-2027-1 created one clearance and four SQL-backed office tasks.
+- A revoked fictional demo token produced the explicit authentication-required state.
+- A localhost origin mismatch produced a safe unavailable-service state. The CORS allow-list was corrected and an OPTIONS preflight then returned 204 with the exact allowed origin.
+
+Evidence mapping
+----------------
+- EVID-W13-APP-000: role selection.
+- EVID-W13-APP-001: successful clearance and four office tasks.
+- EVID-W13-APP-002: invalid term validation.
+- EVID-W13-APP-003: unauthorized state.
+- EVID-W13-FAIL-003: unavailable-service state before recovery.
+
+Limitations
+-----------
+- The real narrow browser screenshot is still pending. Responsive layout is implemented, but no narrow capture is claimed by this record.
+- The final central Word evidence document is intentionally deferred until the end of Week 13 so it can include every checkpoint and Git push.

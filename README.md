@@ -4,7 +4,7 @@ This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is
 
 ## Current status
 
-Checkpoint 4 implements the bounded Laravel workflow and its automation. It creates idempotent reminders, escalates overdue tasks, records one completion notification, retries transient adapter failures up to three times, and routes exhausted or permanent failures to an administrator. Administrator inspection and eligible recovery are role-protected and preserve attempt history. Flutter workflow screens remain the next checkpoint.
+Checkpoint 5 connects a responsive Flutter Web interface to the bounded Laravel workflow and its SQL-backed records. Students can initiate clearance and resolve deficiencies, assigned office personnel can report deficiencies or approve tasks, and administrators can inspect and retry eligible automation failures. Loading, empty, validation, unavailable-service, and unauthorized states are explicit. The local-only demo-session route uses fictional seeded users and is disabled unless the controlled demo environment permits it.
 
 ## Approved stack
 
@@ -39,7 +39,7 @@ evidence/
 5. Run `composer install`, then `php artisan migrate --seed` to create the schema and fictional demonstration records.
 6. Start the API with `php artisan serve --host=127.0.0.1 --port=8000`.
 7. In `frontend`, run `flutter pub get`.
-8. Start Flutter Web with `flutter run -d chrome --web-port=7357`.
+8. Start Flutter Web with `flutter run -d chrome --web-port=7357 --dart-define=API_BASE_URL=http://127.0.0.1:8000/api/v1`.
 
 ## Verification
 
@@ -52,7 +52,7 @@ flutter analyze
 flutter test
 ```
 
-The 28 implemented tests (117 assertions) cover clearance initiation, office deficiency reporting, student resolution, re-review, approval, completion, validation, authorization, duplicate prevention, reminders, escalation, completion notification, recovered transient failure, exhausted retry, human-action routing, and administrator recovery. The next checkpoint adds Flutter integration and real browser evidence.
+The 32 Laravel tests (134 assertions) cover clearance initiation, role-scoped read APIs, office deficiency reporting, student resolution, re-review, approval, completion, validation, authorization, duplicate prevention, reminders, escalation, completion notification, recovered transient failure, exhausted retry, human-action routing, administrator recovery, and the controlled demo-session boundary. Flutter analysis reports no issues and all four widget tests pass.
 
 ## Data and safety
 

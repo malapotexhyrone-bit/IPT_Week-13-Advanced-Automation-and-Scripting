@@ -5,7 +5,10 @@ Only routes marked implemented are authoritative. Planned routes remain design t
 | Status | Method and path | Authorized actor | Purpose | Key outcomes |
 | --- | --- | --- | --- | --- |
 | Implemented | `POST /api/v1/clearances` | Student | Initiate one clearance and create one task per active office | `201`, `409` duplicate, `422` invalid, `401` unauthenticated, `403` wrong role, `503` no active offices |
-| Planned | `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance | `200`, `404`, `401` |
+| Implemented | `POST /api/v1/demo/session` | Controlled local demonstrator | Issue an in-memory Flutter token for a fictional seeded user; disabled outside the configured demo environment | `200`, `403`, `422` |
+| Implemented | `GET /api/v1/me` | Authenticated actor | Read the minimum role and office context required by the Flutter shell | `200`, `401` |
+| Implemented | `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance and office-task summary | `200`, `404`, `401`, `403` |
+| Implemented | `GET /api/v1/office-tasks` | Office personnel | List only tasks assigned to the authenticated reviewer's office | `200`, `401`, `403` |
 | Implemented | `POST /api/v1/office-tasks/{officeTask}/deficiencies` | Assigned office personnel | Record one open deficiency and move the task to `deficiency` | `201`, `403`, `409` invalid state, `422` invalid |
 | Implemented | `POST /api/v1/deficiencies/{deficiency}/resolution` | Owning student | Submit a resolution note and move the task to `awaiting_re_review` | `200`, `403`, `409`, `422` |
 | Implemented | `POST /api/v1/office-tasks/{officeTask}/approve` | Assigned office personnel | Approve a pending or re-review task; complete the clearance after the final approval | `200`, `403`, `409` |

@@ -23,7 +23,13 @@
 - Controlled transient recovery and permanent-failure routing to a human-action item.
 - Administrator-only failure inspection and eligible manual retry with preserved history.
 - Ten automation feature tests; the full regression suite now passes 28 tests and 117 assertions.
+- Responsive Flutter Web role selection and student, office-reviewer, and administrator dashboards.
+- Flutter API client with in-memory demo tokens and safe loading, empty, validation, unavailable-service, and authorization states.
+- Local-only fictional demo-session endpoint plus role-scoped current-user, current-clearance, and assigned-office task reads.
+- CORS configuration for the controlled local Flutter origins.
+- Four Flutter widget tests and four Laravel integration tests; the full backend suite now passes 32 tests and 134 assertions.
+- Labeled real application screenshots for role selection, normal creation, validation, authorization failure, and unavailable-service recovery.
 
 ### Not yet implemented
 
-- Flutter workflow screens and final consolidated evidence.
+- Final live end-to-end completion demonstration, SA7/laboratory consolidation, reflection, narrow browser capture, and final Word evidence journey.

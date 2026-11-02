@@ -9,10 +9,25 @@ use App\Http\Requests\StoreClearanceRequest;
 use App\Models\Clearance;
 use App\Services\ClearanceInitiationService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ClearanceController extends Controller
 {
+    public function current(Request $request): JsonResponse
+    {
+        $clearance = Clearance::query()
+            ->with(['academicTerm', 'officeTasks.office', 'officeTasks.deficiencies'])
+            ->where('student_id', $request->user()->id)
+            ->latest()
+            ->first();
+
+        return response()->json([
+            'data' => $clearance === null ? null : $this->clearanceData($clearance),
+            'meta' => ['correlation_id' => $request->attributes->get('correlation_id')],
+        ]);
+    }
+
     public function store(
         StoreClearanceRequest $request,
         ClearanceInitiationService $service,
@@ -75,6 +90,12 @@ class ClearanceController extends Controller
                     'code' => $task->office->code,
                     'name' => $task->office->name,
                 ],
+                'deficiencies' => $task->deficiencies->map(fn ($deficiency): array => [
+                    'id' => $deficiency->id,
+                    'description' => $deficiency->description,
+                    'status' => $deficiency->status,
+                    'resolution_note' => $deficiency->resolution_note,
+                ])->values(),
             ])->values(),
         ];
     }
