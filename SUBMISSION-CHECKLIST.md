@@ -22,8 +22,8 @@ Status values are `complete`, `pending`, or `blocked`.
 | Permanent failure for human action | complete | `EVID-W13-FAIL-002`; stopped at attempt 3 and created administrator work. |
 | Reminders and stalled-step escalation | complete | Scheduler, queued job, database outcomes, and feature tests. |
 | Completion notification | complete | One idempotent record after completion, verified by feature test. |
-| Desktop and narrow Flutter evidence | pending | Desktop states are captured; a real narrow browser capture remains pending after the controlled browser could not be safely reacquired. |
+| Desktop and narrow Flutter evidence | complete | EVID-W13-APP-001 through APP-007 include real desktop workflow states and a 502-pixel-wide completed view. |
 | Activity 2 failure-injection record | complete | `docs/ACTIVITY-2-CONTROLLED-FAILURE.md` plus labeled logs and tests. |
 | SA7 portfolio and maintainability evaluation | pending | Complete after verified implementation. |
 | Reflection and individual contribution | pending | Student review and personal explanation required. |
-| Checkpoint commits and pushes | pending | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), and 4 (`f9c1fc4`) are pushed; checkpoint 5 is approved and awaiting commit/push. |
+| Checkpoint commits and pushes | pending | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), and 5 (`a31c831`) are pushed; the end-to-end evidence checkpoint awaits review. |

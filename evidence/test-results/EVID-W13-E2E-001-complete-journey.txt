@@ -1,0 +1,40 @@
+EVID-W13-E2E-001 - Complete controlled clearance journey
+Student: Malapote, Xhyrone Wayne N.
+Section: BSIT 3-A
+Date: 2026-11-02 (Asia/Manila)
+Environment: local Flutter Web + Laravel API + controlled MariaDB database
+Base commit: a31c831c08067032fc3e0271833f59d08b05b106
+
+Controlled data
+---------------
+Student: Ari Santos (fictional)
+Academic term: First Semester 2026-2027
+Clearing offices: Registrar, Library, Accounting, Student Affairs
+
+Executed journey and actual result
+----------------------------------
+1. Library reviewer recorded the deficiency: "Return borrowed library book and obtain the library clearance receipt."
+   Actual: Library task changed to deficiency/Needs action.
+   Evidence: EVID-W13-APP-005.
+2. Fictional student submitted a controlled resolution note confirming the book return and receipt.
+   Actual: deficiency was resolved and Library task changed to awaiting_re_review.
+   Evidence: EVID-W13-APP-006.
+3. Assigned office reviewers approved the eligible Registrar, Library, Accounting, and Student Affairs tasks.
+   Actual: all four office tasks reported approved.
+4. The final approval completed the parent clearance.
+   Actual: clearance status completed; Flutter showed 4 of 4 offices approved.
+   Evidence: EVID-W13-APP-007.
+5. Ran `php artisan clearance:automation-run`.
+   Actual: one unique automation delivery record was dispatched.
+6. Ran one local queue worker cycle.
+   Actual: ProcessAutomationDelivery completed successfully.
+7. Queried the SQL-backed completion delivery.
+   Actual: automation_type=clearance_completion, status=delivered, attempt_count=1.
+   Correlation ID: 01M6E0F80N6JK8E16P8R200CG1.
+8. Resized the real Flutter Chrome window to 502 pixels wide.
+   Actual: the completed header and office cards reflowed without horizontal overflow.
+   Evidence: EVID-W13-APP-004.
+
+Expected-versus-actual conclusion
+---------------------------------
+The bounded Project 8 workflow behaved as expected from reported deficiency through recovery, re-review, final completion, and notification. The journey used only fictional local records and did not connect to a university production system.

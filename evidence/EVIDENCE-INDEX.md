@@ -18,7 +18,12 @@ Every entry must reference a real saved artifact. Labels are stable and are used
 | EVID-W13-APP-001 | `screenshots/application/EVID-W13-APP-001-student-normal-path.png` | Real Flutter normal path after SQL-backed clearance creation and four office tasks | complete |
 | EVID-W13-APP-002 | `screenshots/application/EVID-W13-APP-002-validation-state.png` | Real Flutter inline rejection of an invalid academic-term code | complete |
 | EVID-W13-APP-003 | `screenshots/application/EVID-W13-APP-003-unauthorized-state.png` | Real Flutter `401` state after revoking the controlled demonstration token | complete |
+| EVID-W13-APP-004 | `screenshots/application/EVID-W13-APP-004-responsive-narrow.png` | Real 502-pixel-wide Flutter viewport showing the completed workflow without horizontal overflow | complete |
+| EVID-W13-APP-005 | `screenshots/application/EVID-W13-APP-005-library-deficiency.png` | Real office reviewer view of a recorded Library deficiency using fictional data | complete |
+| EVID-W13-APP-006 | `screenshots/application/EVID-W13-APP-006-student-awaiting-review.png` | Real student view after resolution, with the Library task awaiting re-review | complete |
+| EVID-W13-APP-007 | `screenshots/application/EVID-W13-APP-007-clearance-completed.png` | Real student completion screen showing all four offices approved | complete |
 | EVID-W13-FLUTTER-001 | `test-results/EVID-W13-FLUTTER-001-integration-tests.txt` | Flutter analyzer and four widget tests plus the 32-test Laravel regression and live UI verification record | complete |
+| EVID-W13-E2E-001 | `test-results/EVID-W13-E2E-001-complete-journey.txt` | Controlled deficiency, resolution, re-review, four-office approval, completion, and delivered completion-notification record | complete |
 | EVID-W13-FAIL-001 | `logs/EVID-W13-FAIL-001-transient-recovery.jsonl` | Sanitized actual test log: first attempt failed transiently and second attempt delivered with the same correlation ID | complete |
 | EVID-W13-FAIL-002 | `logs/EVID-W13-FAIL-002-permanent-human-action.jsonl` | Sanitized actual test log: three bounded failures ended in human action | complete |
 | EVID-W13-FAIL-003 | `screenshots/application/EVID-W13-FAIL-003-ui-network-state.png` | Real Flutter safe unavailable-service state observed before the localhost CORS allow-list correction | complete |
