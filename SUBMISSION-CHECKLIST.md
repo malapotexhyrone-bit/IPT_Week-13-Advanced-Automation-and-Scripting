@@ -24,6 +24,8 @@ Status values are `complete`, `pending`, or `blocked`.
 | Completion notification | complete | One idempotent record after completion, verified by feature test. |
 | Desktop and narrow Flutter evidence | complete | EVID-W13-APP-001 through APP-007 include real desktop workflow states and a 502-pixel-wide completed view. |
 | Activity 2 failure-injection record | complete | `docs/ACTIVITY-2-CONTROLLED-FAILURE.md` plus labeled logs and tests. |
-| SA7 portfolio and maintainability evaluation | pending | Complete after verified implementation. |
-| Reflection and individual contribution | pending | Student review and personal explanation required. |
-| Checkpoint commits and pushes | pending | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), and 5 (`a31c831`) are pushed; the end-to-end evidence checkpoint awaits review. |
+| SA7 portfolio and maintainability evaluation | complete | `docs/WEEK13-REPORT.md` maps the automation case, laboratory evidence, maintainability evaluation, limitations, and references to the verified build. |
+| Chronological screenshot evidence document | complete | `C:\Users\Admin\Documents\IPT\Evidence Document\Week-13-Screenshot-Journey-and-Evidence.docx` contains 19 visually verified pages with labeled VS Code, Flutter, test, recovery, and Git-push evidence. The central file is intentionally outside this repository. |
+| Defense walkthrough | complete | `docs/DEFENSE-WALKTHROUGH.md` provides a bounded live-demonstration flow, likely defense questions, and a student verification checklist. |
+| Reflection and individual contribution | pending | The report contains a reflection worksheet, but the student must personalize it and verify the explanation in their own words. |
+| Checkpoint commits and pushes | complete | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), 5 (`a31c831`), and 6 (`34d1a58`) are pushed. The student approved the final documentation checkpoint represented by the current repository HEAD for push to `origin/main`. |
