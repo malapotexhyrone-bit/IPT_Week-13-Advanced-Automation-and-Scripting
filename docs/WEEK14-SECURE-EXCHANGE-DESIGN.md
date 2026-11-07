@@ -42,7 +42,7 @@ sequenceDiagram
 | Freshness | Signed request timestamp and five-minute encrypted-message expiry | Rejects stale service calls and expired envelopes | Clock synchronization remains an operational dependency |
 | Replay prevention | Unique UUID message ID stored in MariaDB | A valid envelope can be processed only once | Receipt retention must exceed the replay-risk period |
 | Human-user authorization | Sanctum plus administrator role middleware | Only an authenticated administrator can ask the sender to exchange a clearance | The controlled Week 13 demo-session route is disabled by default in Week 14 |
-| Password protection | Laravel's hashed password cast and framework hashing | Passwords require slow one-way hashing, not reversible encryption | Full user-facing password login is a later Week 14 checkpoint |
+| Password protection | Laravel framework hashing, dummy-hash check, generic errors, and login throttling | Passwords require slow one-way hashing, not reversible encryption | Multifactor authentication and production recovery policy are outside Week 14 scope |
 | Safe diagnostics | Correlation ID, message ID, safe status, and counts only | Supports investigation without logging keys, tokens, plaintext, or ciphertext | Operational log access controls are not demonstrated on localhost |
 
 ## Cryptographic selection record
@@ -84,10 +84,18 @@ The setup tool generates the AES key and HMAC secret with the operating system r
 - Composer first reported seven advisories affecting Symfony 7.4.22 packages. The four affected packages were updated to 7.4.23; the final audit reported no known advisories and the regression suite still passed.
 - Database setup and detached HTTPS startup each failed safely on the first attempt. MariaDB was started before rerunning migration/seed, and the HTTPS endpoint was verified using the foreground managed process. These are recorded as setup/recovery evidence rather than hidden.
 
+## Checkpoint 2 verification record
+
+- Password authentication passed 5 focused tests with 31 assertions. Generic wrong-password and unknown-account behavior, validation, throttling, server-owned roles, logout, and token revocation were verified.
+- The complete backend suite passed 47 tests with 201 assertions. Flutter analysis reported no issues and all 6 widget tests passed.
+- The controlled certificate was installed in the Windows Current User Trusted Root store. The browser was not started with a certificate-bypass option.
+- Six real Flutter browser states were executed and visually inspected: desktop login, invalid credentials, student role, assigned Library-office role, administrator secure exchange, and narrow login.
+- All temporary plaintext browser credential files were permanently deleted after capture. Only Laravel password hashes remain in MariaDB.
+
 ## Current limitations
 
 - The receiver is a controlled local endpoint, not a separately owned university system.
-- The local certificate is validated by the controlled command-line sender through an explicit CA file, but it has not been added to the browser trust store; Flutter HTTPS browser evidence remains pending.
-- The administrator Flutter screen has not yet been extended with the secure-exchange action.
-- Password login, Activity 1, Activity 2, SA8, IA5, the complete report, and final screenshot evidence remain later Week 14 milestones.
+- The local certificate is trusted only for the current Windows user and is not a public production certificate.
+- The Flutter development page is served over local HTTP while its credential-bearing API calls use the trusted local HTTPS API.
+- Activity 1, Activity 2, SA8, IA5, and the main Week 14 report are consolidated in `docs/WEEK14-SECURE-INTEGRATION-REPORT.md`; student reflection verification and the final central evidence DOCX remain pending.
 - Key rotation, revocation, backup protection, centralized secret management, and production certificate operations are documented risks, not demonstrated production capabilities.

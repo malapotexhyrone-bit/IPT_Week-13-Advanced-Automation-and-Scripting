@@ -2,7 +2,7 @@ EVIDENCE ID: EVID-W14-SEC-001
 TITLE: Week 14 backend security and regression verification
 DATE: 2026-11-07 (Asia/Manila)
 REPOSITORY: IPT_Weeks-13-18_Student-Clearance-Workflow
-BRANCH: codex/week14-secure-integration
+BRANCH: week14-secure-integration
 ENVIRONMENT: PHP 8.2.12, Laravel 12, XAMPP MariaDB 10.4.32, controlled fictional seed data
 
 FOCUSED SECURE-EXCHANGE SUITE

@@ -17,6 +17,7 @@ This changelog follows the continuing Weeks 13-18 Student Clearance Workflow. Ea
 - Administrator Flutter action for the protected clearance exchange plus a safe local fictional-password reset tool.
 - Five authentication tests and six Flutter widget tests; the full backend suite now passes 47 tests and 201 assertions.
 - Six visually inspected real Flutter browser captures covering desktop/narrow login, invalid credentials, student role, Library role, and an accepted administrator secure exchange.
+- Consolidated Week 14 report covering both activities, SA8, IA5, threat and risk records, decisions, reproduction, limitations, and defense preparation.
 
 ### Security
 
@@ -25,7 +26,7 @@ This changelog follows the continuing Weeks 13-18 Student Clearance Workflow. Ea
 
 ### Pending
 
-- Activity 1, Activity 2, SA8, IA5, final report, complete screenshot journey, student reflection, later checkpoint commits, final tag, and release.
+- Central evidence DOCX, student-verified reflection, documentation checkpoint commit, final tag, and release.
 
 ## v13.0.0-week13-automation - Week 13 Advanced Automation and Scripting
 

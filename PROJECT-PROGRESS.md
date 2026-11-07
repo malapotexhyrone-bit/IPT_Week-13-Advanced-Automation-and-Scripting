@@ -6,10 +6,11 @@
 - Project: Project 8, Student Clearance Workflow
 - Repository: `https://github.com/malapotexhyrone-bit/IPT_Weeks-13-18_Student-Clearance-Workflow`
 - Local folder: `C:\Users\Admin\Documents\IPT\IPT_Weeks-13-18_Student-Clearance-Workflow`
-- Branch: `codex/week14-secure-integration`
+- Branch: `week14-secure-integration`
 - Week 13 baseline: commit `6a73790b433ec65d34189aa3e3d7add80280b761`, tag `v13.0.0-week13-automation`
-- Checkpoint 1: approved, committed as `7cf96482235715d81f6b99dea45d21b44cf6fe98`, and pushed to `origin/codex/week14-secure-integration`
-- Checkpoint 2: approved by the student on 2026-11-08 for commit and push; the resulting commit hash and remote status are recorded in the checkpoint handover
+- Checkpoint 1: approved, committed as `7cf96482235715d81f6b99dea45d21b44cf6fe98`, and preserved on `origin/week14-secure-integration`
+- Checkpoint 2: approved, committed as `5f7bbc030578bd557b94ee342bd65f7a23be54eb`, and pushed to `origin/week14-secure-integration`
+- Checkpoint 3: approved by the student on 2026-11-08 for commit and push; the resulting commit hash and remote status are recorded in the checkpoint handover
 - Approval: student confirmed instructor approval and registration for Project 8 on 2026-11-07; official registry not inspected
 
 ## Checkpoint 1 completed locally
@@ -46,11 +47,21 @@
 - Setup/recovery record: `evidence/week-14/logs/`
 - Real VS Code captures: `evidence/week-14/screenshots/source-code/` and `evidence/week-14/screenshots/tests/`
 - Real Flutter browser captures: `evidence/week-14/screenshots/application/`
+- Main Week 14 assessment report: `docs/WEEK14-SECURE-INTEGRATION-REPORT.md`
+
+## Checkpoint 3 completed locally
+
+- Reconciled the module's authenticated-encryption laboratory with the Project 8 requirement to justify every cryptographic control.
+- Completed Activity 1 with five corrected cryptographic uses, alternatives, assumptions, one adverse case, limitations, and a labeled one-page interpretation.
+- Completed Activity 2 with source, configuration, HTTPS, tamper, secret, dependency, browser, and residual-risk review plus a labeled one-page interpretation.
+- Completed the SA8 architecture case with threat summary, trust boundaries, control selection, alternatives, decision consequences, and review conditions.
+- Completed the IA5 build record with code excerpts, protected configuration, verification results, failure recovery, evidence map, and reproduction steps.
+- Prepared reflection prompts for the student's own verified wording and a Week 14 technical-defense question set.
 
 ## Pending milestones
 
-1. Complete Activity 1, Activity 2, SA8, IA5, the main report, reflection worksheet, and defense walkthrough.
-2. Create the single central Week 14 DOCX only after the full journey is complete; render and visually inspect every page.
+1. Create the single central Week 14 DOCX after the documentation checkpoint; render and visually inspect every page.
+2. Ask the student to review and personalize the reflection worksheet and rehearse the defense questions.
 3. After final technical and documentation approval, propose the exact Week 14 tag, release title, target commit, and release notes for separate approval.
 
 ## Known constraints and honest gaps

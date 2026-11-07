@@ -13,13 +13,13 @@ This repository is the continuing Project 8 Student Clearance Workflow for PFEBS
 | 17 | `v17.0.0-week17-uat-documentation` | Final Integration UAT Documentation and Evaluation | Not started |
 | 18 | `v18.0.0-week18-final-defense` | Final Integration Review Examination and Technical Defense | Not started |
 
-Week 13 remains preserved at `v13.0.0-week13-automation`. Week 14 is being developed on `codex/week14-secure-integration`; it will not receive its final tag or release until every required checkpoint is approved and the complete week is verified.
+Week 13 remains preserved at `v13.0.0-week13-automation`. Week 14 is being developed on `week14-secure-integration`; it will not receive its final tag or release until every required checkpoint is approved and the complete week is verified.
 
 ## Current status
 
 Week 14, **Secure Data Exchange and Encryption**, is in progress. Checkpoint 1 added an administrator-only sender and a controlled receiver that exchange minimized clearance data over certificate-validated HTTPS. Checkpoint 2 replaces the Week 13 role selector with password authentication, generic invalid-credential handling, login throttling, two-hour Sanctum tokens, token revocation, and server-selected student, office, or administrator dashboards. The administrator Flutter view calls the protected secure-send endpoint without letting the browser choose its role.
 
-The real browser journey now covers desktop and narrow login, generic invalid credentials, student and Library role boundaries, and an accepted administrator secure exchange over the trusted local HTTPS API. Full activities, SA8, IA5, the report, remaining documentation, reflection, and student defense rehearsal are still pending. The student confirmed instructor approval and registration for Project 8; the official registry itself was not inspected. No instructor grade, stakeholder acceptance, production readiness, or completed oral defense is claimed.
+The real browser journey covers desktop and narrow login, generic invalid credentials, student and Library role boundaries, and an accepted administrator secure exchange over the trusted local HTTPS API. Activity 1, Activity 2, SA8, IA5, residual risks, reproduction steps, and defense preparation are consolidated in `docs/WEEK14-SECURE-INTEGRATION-REPORT.md`. The central evidence DOCX and the student's verified reflection remain pending. The student confirmed instructor approval and registration for Project 8; the official registry itself was not inspected. No instructor grade, stakeholder acceptance, production readiness, or completed oral defense is claimed.
 
 ## Approved stack
 
