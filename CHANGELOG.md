@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+This changelog follows the continuing Weeks 13-18 Student Clearance Workflow. Each completed week is preserved by its own version tag and GitHub release.
+
+## v13.0.0-week13-automation - Week 13 Advanced Automation and Scripting
 
 ### Added
 
@@ -30,6 +32,10 @@
 - Four Flutter widget tests and four Laravel integration tests; the full backend suite now passes 32 tests and 134 assertions.
 - Labeled real application screenshots for role selection, normal creation, validation, authorization failure, and unavailable-service recovery.
 
-### Not yet implemented
+### Student-owned follow-up
 
-- Final live end-to-end completion demonstration, SA7/laboratory consolidation, reflection, narrow browser capture, and final Word evidence journey.
+- Personalize the reflection, reproduce the checks, rehearse the defense walkthrough, and confirm the instructor's required submission format.
+
+### Future versions
+
+- Week 14 through Week 18 are not implemented in this version. They will be added only through their respective approved weekly work.

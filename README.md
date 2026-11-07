@@ -1,10 +1,23 @@
-# Student Clearance Workflow Week 13
+# PFEBSIT 002 Weeks 13-18 Student Clearance Workflow
 
-This repository contains the Week 13 version of Project 8 for PFEBSIT 002. It is an individual Student Clearance Workflow prototype focused on reliable automation and scripting.
+This repository is the continuing Project 8 Student Clearance Workflow for PFEBSIT 002 Weeks 13-18. Each completed week is preserved as a named Git tag and GitHub release so its submitted source and evidence remain reproducible while the system advances in later weeks.
+
+## Weekly versions
+
+| Week | Version | Module title | Status |
+| --- | --- | --- | --- |
+| 13 | `v13.0.0-week13-automation` | Advanced Automation and Scripting | Complete |
+| 14 | `v14.0.0-week14-secure-data-exchange` | Secure Data Exchange and Encryption | Not started |
+| 15 | `v15.0.0-week15-testing-hardening` | Integration Testing and Security Hardening | Not started |
+| 16 | `v16.0.0-week16-performance-deployment` | Performance Reliability and Deployment Evaluation | Not started |
+| 17 | `v17.0.0-week17-uat-documentation` | Final Integration UAT Documentation and Evaluation | Not started |
+| 18 | `v18.0.0-week18-final-defense` | Final Integration Review Examination and Technical Defense | Not started |
+
+Only Week 13 is implemented in the current repository state. Future week versions will be added only when their work is requested, completed, verified, and approved.
 
 ## Current status
 
-Week 13 is technically complete at commit `6c3b5a7`. The responsive Flutter Web interface is connected to the bounded Laravel workflow and its SQL-backed records. Students can initiate clearance and resolve deficiencies, assigned office personnel can report deficiencies or approve tasks, and administrators can inspect and retry eligible automation failures. Loading, empty, validation, unavailable-service, unauthorized, deficiency, re-review, completion, and responsive states are preserved in the evidence journey. The local-only demo-session route uses fictional seeded users and is disabled unless the controlled demo environment permits it.
+Week 13, **Advanced Automation and Scripting**, is technically complete through commit `f8d36cb`. The responsive Flutter Web interface is connected to the bounded Laravel workflow and its SQL-backed records. Students can initiate clearance and resolve deficiencies, assigned office personnel can report deficiencies or approve tasks, and administrators can inspect and retry eligible automation failures. Loading, empty, validation, unavailable-service, unauthorized, deficiency, re-review, completion, and responsive states are preserved in the evidence journey. The local-only demo-session route uses fictional seeded users and is disabled unless the controlled demo environment permits it.
 
 The remaining student-owned work is to personalize the reflection, reproduce the checks, rehearse the defense walkthrough, and confirm the instructor's submission format. No instructor grade, stakeholder approval, production readiness, or completed oral defense is claimed.
 
@@ -13,7 +26,7 @@ The remaining student-owned work is to personalize the reflection, reproduce the
 - Flutter 3.47.8 and Dart 3.13.7 for the browser client
 - Laravel 12 on PHP 8.2.12 for the API and automation
 - XAMPP MariaDB 10.4.32 using the MySQL driver
-- Git with a separate Week 13 repository
+- Git tags and GitHub releases preserving one verified version for each completed week
 
 Laravel 12 was selected because it supports PHP 8.2. Laravel 13 requires PHP 8.3 and is therefore not used in this environment.
 
