@@ -2,6 +2,27 @@
 
 This changelog follows the continuing Weeks 13-18 Student Clearance Workflow. Each completed week is preserved by its own version tag and GitHub release.
 
+## Unreleased - Week 14 Secure Data Exchange and Encryption
+
+### Added
+
+- Administrator-only secure-exchange sender and HMAC-authenticated controlled receiver.
+- Minimized clearance payload protected with AES-256-GCM authenticated encryption.
+- Certificate-validated local HTTPS scripts, ignored key material, and safe configuration placeholders.
+- Short request and message validity windows, unique receipt storage, and replay rejection.
+- Safe receipt records containing message metadata and a payload hash without plaintext or ciphertext.
+- Twelve focused security tests covering the success path and eleven adverse or authorization cases.
+
+### Security
+
+- Updated Symfony HTTP Foundation, HTTP Kernel, Routing, and YAML from 7.4.22 to 7.4.23 after Composer reported seven advisories published on 4 November 2026.
+- Re-ran Composer audit with no known advisories, Laravel Pint, and the complete 44-test, 178-assertion regression suite.
+
+### Pending
+
+- Password authentication and the Week 14 Flutter role-based interface.
+- Activity 1, Activity 2, SA8, IA5, final report, complete screenshot journey, student reflection, checkpoint commits, final tag, and release.
+
 ## v13.0.0-week13-automation - Week 13 Advanced Automation and Scripting
 
 ### Added

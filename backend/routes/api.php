@@ -7,11 +7,14 @@ use App\Http\Controllers\Api\V1\DeficiencyResolutionController;
 use App\Http\Controllers\Api\V1\DemoSessionController;
 use App\Http\Controllers\Api\V1\OfficeTaskQueueController;
 use App\Http\Controllers\Api\V1\OfficeTaskReviewController;
+use App\Http\Controllers\Api\V1\SecureExchangeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
     Route::post('/demo/session', [DemoSessionController::class, 'store']);
+    Route::post('/secure-exchange/receive', [SecureExchangeController::class, 'receive'])
+        ->middleware('exchange.auth');
 });
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function (): void {
@@ -33,5 +36,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function (): void {
     Route::get('/automation/failures', [AutomationFailureController::class, 'index'])
         ->middleware('role:'.User::ROLE_ADMIN);
     Route::post('/automation/deliveries/{automationDelivery}/retry', [AutomationFailureController::class, 'retry'])
+        ->middleware('role:'.User::ROLE_ADMIN);
+    Route::post('/secure-exchange/send', [SecureExchangeController::class, 'send'])
         ->middleware('role:'.User::ROLE_ADMIN);
 });

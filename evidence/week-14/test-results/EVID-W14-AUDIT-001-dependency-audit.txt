@@ -1,0 +1,17 @@
+EVIDENCE ID: EVID-W14-AUDIT-001
+TITLE: Dependency advisory finding and remediation
+DATE: 2026-11-07 (Asia/Manila)
+
+INITIAL RESULT
+`composer audit --locked` reported seven advisories published on 2026-11-04 affecting Symfony 7.4.22 components used by the locked dependency graph: HTTP Foundation, HTTP Kernel, Routing, and YAML.
+
+ACTION
+Updated the four affected Symfony packages from 7.4.22 to 7.4.23. Composer also updated `symfony/deprecation-contracts` and `symfony/event-dispatcher-contracts` from 3.7.1 to 3.8.1 as resolved dependencies. `composer.lock` records the exact result.
+
+FINAL RESULT
+Composer audit: PASS — no known security advisories found.
+Laravel Pint: PASS.
+Full backend regression: PASS — 44 tests, 178 assertions.
+
+INTERPRETATION
+The first audit was a genuine adverse finding, not a passing result. The final clean audit applies to the locked packages on this date; future advisories require a new audit.

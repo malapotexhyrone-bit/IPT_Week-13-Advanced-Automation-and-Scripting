@@ -1,34 +1,32 @@
-# Week 13 Submission Checklist
+# Week 14 Submission Checklist
 
 Status values are `complete`, `pending`, or `blocked`.
 
 | Requirement | Status | Evidence or next action |
 | --- | --- | --- |
-| Approved Project 8 scope | complete | Student confirmed instructor approval and unique assignment. |
-| Separate Week 13 repository | complete | Local repository and verified empty remote are connected. |
-| Flutter Web source | complete | Responsive role selection and student, office, and administrator workflow screens call the Laravel API. |
-| Laravel API source | complete | Clearance workflow plus administrator automation inspection/retry endpoints are implemented and tested. |
-| MariaDB/MySQL configuration example | complete | `backend/.env.example`; no secret is included. |
-| Workflow boundary and non-goals | complete | `docs/PROJECT-SCOPE.md` |
-| Data flow and trust boundaries | complete | `docs/SYSTEM-DATA-FLOW-AND-TRUST-BOUNDARIES.md` identifies the public client, trusted API, SQL records, queue, bounded gateway, logs, and human-action boundary. |
-| Measurable acceptance criteria | complete | `docs/ACCEPTANCE-CRITERIA.md` maps normal, adverse, recovery, automation, and responsive outcomes to evidence. |
-| Trigger and execution decision | complete | `docs/ARCHITECTURE-DECISION-001.md` |
-| Activity 1 comparison and interpretation | complete | `docs/ACTIVITY-1-TRIGGER-PATTERNS.md` |
-| Flutter screen-flow diagram | complete | `docs/FLUTTER-SCREEN-FLOW.md` matches the implemented role-based UI. |
-| API contract | complete | `docs/API-CONTRACT.md` matches implemented workflow, read, controlled-demo, and administrator automation routes. |
-| Bounded retry and recovery policy | complete | `docs/RETRY-RECOVERY-POLICY.md` |
-| Structured sanitized logs | complete | `EVID-W13-FAIL-001` and `EVID-W13-FAIL-002` contain safe actual test outcomes and correlation IDs. |
-| Duplicate-processing protection | complete | Database unique keys plus executed duplicate-processing tests cover clearance and automation effects. |
-| Success plus four adverse paths | complete | Normal creation plus invalid, unauthenticated, forbidden, duplicate, unavailable-office, invalid-transition, and controlled dependency-failure cases are recorded in the labeled test and UI evidence. |
-| Recovered transient failure | complete | `EVID-W13-FAIL-001`; recovered on attempt 2 without duplicate effect. |
-| Permanent failure for human action | complete | `EVID-W13-FAIL-002`; stopped at attempt 3 and created administrator work. |
-| Reminders and stalled-step escalation | complete | Scheduler, queued job, database outcomes, and feature tests. |
-| Completion notification | complete | One idempotent record after completion, verified by feature test. |
-| Desktop and narrow Flutter evidence | complete | EVID-W13-APP-001 through APP-007 include real desktop workflow states and a 502-pixel-wide completed view. |
-| Activity 2 failure-injection record | complete | `docs/ACTIVITY-2-CONTROLLED-FAILURE.md` plus labeled logs and tests. |
-| SA7 portfolio and maintainability evaluation | complete | `docs/WEEK13-REPORT.md` maps the automation case, laboratory evidence, maintainability evaluation, limitations, and references to the verified build. |
-| Security and observability review | complete | `docs/SECURITY-OBSERVABILITY-CHECKLIST.md` records verified controls, residual limits, signals, and future operational work. |
-| Consolidated documentation and screenshot journey | complete | The central `Week-13-Screenshot-Journey-and-Evidence.docx` and matching PDF contain 26 visually verified pages, 16 embedded media files, labeled chronological VS Code/Flutter/test evidence, requirements mapping, creation steps, Git history, limitations, and defense preparation. Both central files are intentionally outside this repository. |
-| Defense walkthrough | complete | `docs/DEFENSE-WALKTHROUGH.md` provides a bounded live-demonstration flow, likely defense questions, and a student verification checklist. |
-| Reflection and individual contribution | pending | The report contains a reflection worksheet, but the student must personalize it and verify the explanation in their own words. |
-| Checkpoint commits and pushes | complete | Checkpoints 1 (`1361028`), 2 (`10c9a88`), 3 (`aceb8c6`), 4 (`f9c1fc4`), 5 (`a31c831`), 6 (`34d1a58`), 7 (`6c3b5a7`), and 8 (`f8d36cb`) are pushed. Week 13 is preserved as version `v13.0.0-week13-automation` in the continuing Weeks 13-18 repository. |
+| Continuing Weeks 13-18 repository | complete | Week 13 history and tag are preserved; Week 14 work is isolated on `codex/week14-secure-integration`. |
+| Project 8 approval and registration | pending | The student reports assignment to Project 8; the official instructor registry has not been inspected. |
+| Data classification and minimization | complete | `docs/WEEK14-SECURE-EXCHANGE-DESIGN.md` and `SecureClearanceExchange.php` define included and excluded fields. |
+| Administrator-only sender | complete | Sanctum and administrator-role middleware protect the send endpoint; unauthenticated and forbidden tests pass. |
+| Controlled sender/receiver integration | complete | Laravel sender and receiver exchange the minimized payload and create one safe receipt. |
+| HTTPS with certificate and hostname validation | complete | Controlled localhost TLS 1.3 verification succeeded with the configured CA; the untrusted-certificate request failed as expected. |
+| Authenticated encryption | complete | AES-256-GCM uses a random 96-bit nonce, 128-bit tag, and authenticated metadata. |
+| Calling-service authentication | complete | HMAC-SHA-256 covers the request timestamp and exact JSON body before decryption. |
+| Keys outside source control | complete | Fresh values are stored only in ignored `.env` and `backend/storage/https`; tracked files contain placeholders and scripts. |
+| Alteration, wrong-key, expiry, and replay rejection | complete | Focused security suite passes 12 tests / 44 assertions. |
+| Unavailable-key, malformed-input, and missing-CA cases | complete | Controlled 503/422/503 outcomes are covered without creating receipts. |
+| Full backend regression | complete | 44 tests / 178 assertions pass after the security dependency update. |
+| Dependency audit and remediation | complete | Initial seven Symfony advisories were preserved as evidence; affected packages were updated to 7.4.23 and the final audit reports none. |
+| Safe logs and receipts | complete | Receipts store metadata and a SHA-256 hash only; secret scan found no live key or credential in tracked candidates. |
+| Password authentication | pending | Add a student-explainable login flow using Laravel password hashing and Sanctum. |
+| Least-privilege Flutter role flows | pending | Extend Flutter Web for student, clearing-office, and administrator Week 14 states over the controlled HTTPS setup. |
+| Success plus at least four adverse paths in build evidence | pending | Automated adverse cases are complete; selected real interface/API journey evidence still needs capture. |
+| Activity 1: review five cryptographic uses | pending | Prepare the required one-page interpretation and map each use to its proper control. |
+| Activity 2: secure-exchange review | pending | Complete the structured review against the finished build and preserve its one-page interpretation. |
+| SA8 Secure Integration Architecture Case | pending | Prepare the threat summary, architecture, decisions, limitations, and evidence mapping. |
+| IA5 Secure Data Exchange Build | pending | Assemble code excerpts, configuration evidence, executed tests, limitations, and decision record. |
+| Main Week 14 report | pending | Create after implementation and evidence are complete; do not confuse the report with internal progress notes. |
+| Central evidence DOCX | pending | Create `Evidence Document/Week-14-Screenshot-Journey-and-Evidence.docx` only at the end, then render and inspect every page. |
+| Student reflection and individual contribution | pending | Student must personalize and verify these statements in their own words. |
+| Checkpoint 1 commit and push | pending | Awaiting explicit student approval; nothing is staged, committed, or pushed. |
+| Final tag and GitHub release | pending | Create `v14.0.0-week14-secure-integration` only after every required Week 14 checkpoint is complete and approved. |

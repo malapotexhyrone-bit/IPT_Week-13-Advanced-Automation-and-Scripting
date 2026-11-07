@@ -1,0 +1,25 @@
+EVIDENCE ID: EVID-W14-HTTPS-001
+TITLE: Controlled HTTPS transport and secure exchange
+DATE: 2026-11-07 (Asia/Manila)
+ENDPOINT: https://localhost:8443
+DATA: fictional seeded clearance CLR-000001
+
+CERTIFICATE
+Subject/issuer: CN=localhost (controlled self-signed development certificate)
+Validity: 2026-11-07 06:39:02 UTC to 2027-11-07 06:39:02 UTC
+SHA-256 fingerprint: C4:C0:11:3A:BC:A9:89:BD:38:EE:85:20:69:33:75:C2:C3:2C:29:EF:79:93:2A:71:5C:CB:38:DC:A7:67:61:06
+
+VALIDATED TRANSPORT
+OpenSSL negotiated TLSv1.3 with TLS_AES_256_GCM_SHA384 and reported Verification OK for CN=localhost.
+The health request using the configured CA file returned HTTP 200.
+
+INVALID-CERTIFICATE CONTROL
+The request without the configured CA trust failed as expected with curl exit 60 and SEC_E_UNTRUSTED_ROOT. It was not reported as a successful connection.
+
+SUCCESSFUL SECURE EXCHANGE
+Message ID: b8f1fc17-fb55-43dd-9dcb-91836bb3f173
+Result: accepted once for CLR-000001, overall status in_progress, four office records.
+Receipt check: one receipt was stored; the payload hash length is 64 hexadecimal characters.
+
+LIMITATION
+This proves a controlled localhost TLS arrangement with explicit CA validation. It is not a public-certificate or production-university deployment claim.

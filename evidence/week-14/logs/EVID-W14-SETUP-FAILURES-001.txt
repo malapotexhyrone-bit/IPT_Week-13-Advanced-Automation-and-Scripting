@@ -1,0 +1,14 @@
+EVIDENCE ID: EVID-W14-SETUP-FAIL-001
+TITLE: Controlled setup failures and recovery
+DATE: 2026-11-07 (Asia/Manila)
+
+FAILURE 1 — DATABASE UNAVAILABLE
+The first fresh-database setup attempt failed because XAMPP MariaDB was stopped. No success was claimed and no production database was contacted.
+Recovery: started the local MariaDB service, confirmed it answered a ping, created the controlled `student_clearance_workflow` database, and reran `migrate:fresh --seed`. All 11 migrations, including the secure-exchange receipt migration, completed.
+
+FAILURE 2 — DETACHED HTTPS PROCESS DID NOT REMAIN LISTENING
+The first detached local HTTPS helper returned without leaving a verified listener. It was not treated as a successful service start.
+Recovery: ran the controlled Apache HTTPS configuration in a managed foreground process, then verified the listener with the CA-validated HTTP 200 check, OpenSSL Verification OK, and a real sender/receiver exchange.
+
+LESSON
+Service startup output alone is not sufficient evidence. Verify database reachability, the active HTTPS listener, certificate trust, and an application-level request before reporting readiness.

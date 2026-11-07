@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AttachCorrelationId;
+use App\Http\Middleware\AuthenticateSecureExchange;
 use App\Http\Middleware\EnsureRole;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
@@ -17,7 +18,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->appendToGroup('api', AttachCorrelationId::class);
-        $middleware->alias(['role' => EnsureRole::class]);
+        $middleware->alias([
+            'role' => EnsureRole::class,
+            'exchange.auth' => AuthenticateSecureExchange::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
