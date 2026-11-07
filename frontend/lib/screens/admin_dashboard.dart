@@ -13,7 +13,7 @@ class AdminDashboard extends StatefulWidget {
   });
 
   final ClearanceApi api;
-  final DemoSession session;
+  final AuthenticatedSession session;
   final VoidCallback onSignOut;
 
   @override
@@ -21,9 +21,13 @@ class AdminDashboard extends StatefulWidget {
 }
 
 class _AdminDashboardState extends State<AdminDashboard> {
+  final _clearanceIdController = TextEditingController();
   List<Map<String, dynamic>> _failures = const [];
   Object? _error;
+  Object? _exchangeError;
+  Map<String, dynamic>? _exchangeResult;
   bool _loading = true;
+  bool _sendingExchange = false;
   int? _busyDelivery;
 
   @override
@@ -33,11 +37,17 @@ class _AdminDashboardState extends State<AdminDashboard> {
   }
 
   @override
+  void dispose() {
+    _clearanceIdController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppShell(
       session: widget.session,
-      title: 'Automation review',
-      subtitle: 'Inspect bounded failures and retry only when the recorded outcome is eligible.',
+      title: 'Security and automation review',
+      subtitle: 'Send a minimized protected clearance record or inspect bounded automation failures.',
       onSignOut: widget.onSignOut,
       actions: [
         IconButton(
@@ -51,6 +61,22 @@ class _AdminDashboardState extends State<AdminDashboard> {
   }
 
   Widget _body() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _secureExchangeCard(),
+        const SizedBox(height: 22),
+        Text(
+          'Automation failures',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(height: 14),
+        _automationBody(),
+      ],
+    );
+  }
+
+  Widget _automationBody() {
     if (_loading) {
       return const LoadingPanel(label: 'Loading automation failures');
     }
@@ -69,6 +95,102 @@ class _AdminDashboardState extends State<AdminDashboard> {
       );
     }
     return Column(children: _failures.map(_failureCard).toList());
+  }
+
+  Widget _secureExchangeCard() {
+    final result = _exchangeResult;
+    final errorMessage = _exchangeError is ApiException
+        ? (_exchangeError as ApiException).message
+        : _exchangeError == null
+        ? null
+        : 'The protected exchange could not be completed.';
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(22),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 16,
+              runSpacing: 10,
+              children: [
+                Text(
+                  'Protected clearance exchange',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const StatusLabel('administrator_only'),
+              ],
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'The server loads the selected clearance, minimizes its fields, encrypts it with AES-256-GCM, and sends it through validated HTTPS.',
+            ),
+            const SizedBox(height: 18),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 320),
+              child: TextField(
+                key: const Key('secure-clearance-id'),
+                controller: _clearanceIdController,
+                enabled: !_sendingExchange,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  labelText: 'Clearance database ID',
+                  helperText: 'Use a fictional local clearance record.',
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: FilledButton.icon(
+                onPressed: _sendingExchange ? null : _sendSecureExchange,
+                icon: const Icon(Icons.enhanced_encryption_outlined),
+                label: Text(
+                  _sendingExchange
+                      ? 'Protecting and sending...'
+                      : 'Send protected record',
+                ),
+              ),
+            ),
+            if (errorMessage != null) ...[
+              const SizedBox(height: 16),
+              Semantics(
+                liveRegion: true,
+                child: Text(
+                  errorMessage,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
+            ],
+            if (result != null) ...[
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE7EEE9),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Receiver accepted the protected record.',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 5),
+                    SelectableText('Message ID: ${result['message_id']}'),
+                    Text('Status: ${result['status'] ?? 'accepted'}'),
+                  ],
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _failureCard(Map<String, dynamic> failure) {
@@ -161,6 +283,38 @@ class _AdminDashboardState extends State<AdminDashboard> {
       if (mounted) setState(() => _error = error);
     } finally {
       if (mounted) setState(() => _busyDelivery = null);
+    }
+  }
+
+  Future<void> _sendSecureExchange() async {
+    final clearanceId = int.tryParse(_clearanceIdController.text.trim());
+    if (clearanceId == null || clearanceId < 1) {
+      setState(() {
+        _exchangeResult = null;
+        _exchangeError = const ApiException(
+          statusCode: 422,
+          code: 'INVALID_CLEARANCE_ID',
+          message: 'Enter a valid fictional clearance database ID.',
+        );
+      });
+      return;
+    }
+
+    setState(() {
+      _sendingExchange = true;
+      _exchangeError = null;
+      _exchangeResult = null;
+    });
+    try {
+      final result = await widget.api.sendSecureExchange(
+        widget.session.token,
+        clearanceId,
+      );
+      if (mounted) setState(() => _exchangeResult = result);
+    } catch (error) {
+      if (mounted) setState(() => _exchangeError = error);
+    } finally {
+      if (mounted) setState(() => _sendingExchange = false);
     }
   }
 }

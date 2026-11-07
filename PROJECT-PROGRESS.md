@@ -8,7 +8,9 @@
 - Local folder: `C:\Users\Admin\Documents\IPT\IPT_Weeks-13-18_Student-Clearance-Workflow`
 - Branch: `codex/week14-secure-integration`
 - Week 13 baseline: commit `6a73790b433ec65d34189aa3e3d7add80280b761`, tag `v13.0.0-week13-automation`
-- Checkpoint status: checkpoint 1 implemented and verified locally; not staged, committed, or pushed pending student approval
+- Checkpoint 1: approved, committed as `7cf96482235715d81f6b99dea45d21b44cf6fe98`, and pushed to `origin/codex/week14-secure-integration`
+- Checkpoint 2: approved by the student on 2026-11-08 for commit and push; the resulting commit hash and remote status are recorded in the checkpoint handover
+- Approval: student confirmed instructor approval and registration for Project 8 on 2026-11-07; official registry not inspected
 
 ## Checkpoint 1 completed locally
 
@@ -22,26 +24,40 @@
 - Updated affected Symfony packages to 7.4.23 after an initial seven-advisory audit; the final audit reports no known advisories.
 - Preserved real setup failures and recovery rather than converting them into successful first-attempt claims.
 
+## Checkpoint 2 completed locally
+
+- Replaced the active Week 13 demo-session route and role selector with email/password authentication.
+- Added generic credential errors, a dummy hash check for unknown accounts, five-attempt-per-minute throttling, two-hour Sanctum tokens, and logout revocation.
+- Added a safe tool that generates a one-time-displayed password for an existing fictional account while storing only its hash.
+- Updated Flutter to derive student, assigned-office, or administrator navigation only from the authenticated server response.
+- Added the administrator protected-exchange form and HTTPS API client default.
+- Focused authentication result: 5 tests / 31 assertions.
+- Complete backend result: 47 tests / 201 assertions.
+- Flutter result: analysis reports no issues; 6 widget tests pass.
+- Preserved the failed guard-cache test, off-screen widget interactions, and missing test import as corrected verification findings.
+- Captured six real Chrome views: desktop login, generic invalid-credential response, student dashboard, assigned Library-office dashboard, accepted administrator secure exchange, and narrow login.
+- Used a trusted controlled localhost certificate without disabling certificate checks; the Flutter page remained on local HTTP while its credential-bearing API requests used verified HTTPS.
+- Permanently deleted all three temporary plaintext browser-credential files after capture; only Laravel password hashes remain in the database.
+
 ## Evidence locations
 
 - Week 14 index: `evidence/week-14/EVIDENCE-INDEX.md`
 - Test and transport records: `evidence/week-14/test-results/`
 - Setup/recovery record: `evidence/week-14/logs/`
 - Real VS Code captures: `evidence/week-14/screenshots/source-code/` and `evidence/week-14/screenshots/tests/`
+- Real Flutter browser captures: `evidence/week-14/screenshots/application/`
 
 ## Pending milestones
 
-1. Obtain checkpoint 1 approval, then stage the listed files, commit, and push the feature branch.
-2. Add password authentication and least-privilege Week 14 Flutter role flows.
-3. Capture real success, alteration, replay, certificate, invalid-input, authorization, and unavailable-service journey evidence.
-4. Complete Activity 1, Activity 2, SA8, IA5, the main report, reflection worksheet, and defense walkthrough.
-5. Create the central Week 14 DOCX only after the full journey is complete; render and visually inspect every page.
-6. After final approval, merge/push the approved Week 14 result and create tag `v14.0.0-week14-secure-integration` and its GitHub release.
+1. Complete Activity 1, Activity 2, SA8, IA5, the main report, reflection worksheet, and defense walkthrough.
+2. Create the single central Week 14 DOCX only after the full journey is complete; render and visually inspect every page.
+3. After final technical and documentation approval, propose the exact Week 14 tag, release title, target commit, and release notes for separate approval.
 
 ## Known constraints and honest gaps
 
-- The student reports assignment to Project 8, but the official instructor registry has not been inspected.
+- The student confirmed instructor approval/registration for Project 8; the official instructor registry has not been inspected.
 - The receiver is a controlled localhost integration, not a production university service.
-- Browser trust and Flutter Week 14 HTTPS behavior are not yet implemented or evidenced.
+- The controlled localhost certificate is trusted only in the current user's Windows certificate store and is not a production deployment certificate.
+- The Flutter development page is served over local HTTP; credential-bearing application API calls were verified over HTTPS. This does not claim a production all-HTTPS deployment.
 - The Week 13 tag exists, but no GitHub release was found during the Week 14 starting-state inspection; no release was created without separate approval.
 - No final Week 14 submission or defense readiness is claimed.

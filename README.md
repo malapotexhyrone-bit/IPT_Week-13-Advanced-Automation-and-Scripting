@@ -17,9 +17,9 @@ Week 13 remains preserved at `v13.0.0-week13-automation`. Week 14 is being devel
 
 ## Current status
 
-Week 14, **Secure Data Exchange and Encryption**, is in progress. The first implementation checkpoint adds an administrator-only sender and a controlled receiver that exchange minimized clearance data over certificate-validated HTTPS. AES-256-GCM protects the payload, HMAC-SHA-256 authenticates the calling service, short validity windows reject stale traffic, and a unique receipt prevents replay. The implementation records hashes and metadata rather than plaintext or ciphertext.
+Week 14, **Secure Data Exchange and Encryption**, is in progress. Checkpoint 1 added an administrator-only sender and a controlled receiver that exchange minimized clearance data over certificate-validated HTTPS. Checkpoint 2 replaces the Week 13 role selector with password authentication, generic invalid-credential handling, login throttling, two-hour Sanctum tokens, token revocation, and server-selected student, office, or administrator dashboards. The administrator Flutter view calls the protected secure-send endpoint without letting the browser choose its role.
 
-The Week 14 Flutter authentication and role-based interface, full activities, SA8, IA5, report, remaining evidence journey, reflection, and student defense rehearsal are still pending. No instructor grade, official registry inspection, stakeholder approval, production readiness, or completed oral defense is claimed.
+The real browser journey now covers desktop and narrow login, generic invalid credentials, student and Library role boundaries, and an accepted administrator secure exchange over the trusted local HTTPS API. Full activities, SA8, IA5, the report, remaining documentation, reflection, and student defense rehearsal are still pending. The student confirmed instructor approval and registration for Project 8; the official registry itself was not inspected. No instructor grade, stakeholder acceptance, production readiness, or completed oral defense is claimed.
 
 ## Approved stack
 
@@ -57,7 +57,8 @@ evidence/
 6. Generate the controlled localhost certificate and ignored secrets by following `docs/WEEK14-SECURE-EXCHANGE-DESIGN.md` and the scripts under `tools/`.
 7. Start the certificate-validated HTTPS endpoint on `https://localhost:8443` with the Week 14 local HTTPS script.
 8. Run the sender/receiver demonstration only with fictional seeded data.
-9. In `frontend`, run `flutter pub get`. The Week 14 Flutter HTTPS command will be documented when its integration checkpoint is implemented and verified.
+9. Run `php tools/reset-demo-password.php <fictional-email>` to generate a one-time-displayed local password; only its hash is stored.
+10. In `frontend`, run `flutter pub get`, then `flutter run -d chrome --web-port=7357 --dart-define=API_BASE_URL=https://localhost:8443/api/v1`. The browser must trust the controlled localhost certificate; do not bypass certificate warnings for final evidence.
 
 ## Verification
 
@@ -70,7 +71,7 @@ flutter analyze
 flutter test
 ```
 
-The current backend regression result is 44 passing tests with 178 assertions. The focused secure-exchange suite passes 12 tests with 44 assertions, including accepted exchange, alteration, wrong key, invalid HMAC, expired request, expired message, replay, unauthenticated and forbidden sender calls, unavailable key, malformed envelope, and missing CA trust. Laravel Pint passes and Composer reports no known security advisories after the four affected Symfony packages were updated from 7.4.22 to 7.4.23. Flutter Week 14 verification is pending its implementation checkpoint.
+The current backend regression result is 47 passing tests with 201 assertions. This includes five authentication tests with 31 assertions and 12 secure-exchange tests. The authentication suite covers server-owned role selection, password hashing, generic wrong/unknown-account errors, validation, throttling, logout, and revoked-token rejection. Laravel Pint and Flutter analysis pass; all six Flutter widget tests pass. Composer reports no known advisories after the affected Symfony packages were updated to 7.4.23. Six real browser application screenshots were executed and visually inspected without exposing passwords.
 
 ## Data and safety
 

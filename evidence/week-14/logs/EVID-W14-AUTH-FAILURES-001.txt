@@ -1,0 +1,24 @@
+EVIDENCE ID: EVID-W14-AUTH-FAIL-001
+TITLE: Authentication and Flutter verification findings and recovery
+DATE: 2026-11-07 (Asia/Manila)
+
+FINDING 1 — LOGOUT TEST RETAINED A CACHED GUARD
+Initial result: 4 focused tests passed and the logout test failed because a second simulated request reused Laravel's in-process authenticated guard even though the token row had been deleted.
+Correction: cleared the cached authentication guards between the logout request and revoked-token request. This changes test isolation only; production token deletion was unchanged.
+Retest: PASS — 5 tests, 31 assertions.
+
+FINDING 2 — RESPONSIVE WIDGET TESTS TAPPED BELOW THE VIEWPORT
+Initial result: the login interface was correctly scrollable, but five tests tried to tap the submit button below the default 800×600 test viewport.
+Correction: each test scrolls the submit control into view before tapping it.
+Retest: PASS — all 6 widget tests.
+
+FINDING 3 — RETAINED OWNERSHIP TESTS LOST A MODEL IMPORT
+Initial full backend result: 45 tests passed and two Flutter API ownership tests could not load `App\Models\User` after the obsolete demo tests were removed.
+Correction: restored the required import without changing application behavior.
+Retest: PASS — 47 tests, 201 assertions.
+
+LESSON
+Token persistence, responsive interaction, and test-file imports must be verified independently. A failing test is preserved as a finding until the corrected behavior passes the focused and regression suites.
+
+BROWSER CAPTURE FINDINGS
+Windows accessibility could inspect and populate Flutter's hidden inputs but could not reliably invoke its canvas-rendered submit control. The Chrome-specific connector was unavailable. The bundled Playwright runtime was therefore run against only the local application with Flutter semantics explicitly enabled and without certificate bypass. Several early captures stopped on duplicate accessibility announcements, brittle exact-text matching, diagnostic login throttling, or loading skeletons. The final run verified HTTP outcomes, used tolerant semantics matching, reset only the controlled diagnostic throttle, and waited for data-ready markers. All six final screenshots were visually inspected; premature skeleton captures were overwritten and are not claimed as evidence.

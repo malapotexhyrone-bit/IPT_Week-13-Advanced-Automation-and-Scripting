@@ -1,0 +1,26 @@
+EVIDENCE ID: EVID-W14-BROWSER-001
+TITLE: Real Flutter Web HTTPS authentication and secure-exchange journey
+DATE: 2026-11-07 (Asia/Manila)
+URL: http://127.0.0.1:7357
+API: https://localhost:8443/api/v1
+DATA: controlled fictional @example.test accounts and local clearance ID 1
+
+TRANSPORT PRECONDITION
+The controlled CN=localhost certificate was installed in the Windows Current User Trusted Root store. The browser was not started with an ignore-certificate-errors option and no certificate warning was bypassed. Earlier CLI evidence separately records TLS 1.3, CA validation, and the failed untrusted-root control.
+
+EXECUTED JOURNEY
+1. Loaded the real responsive Flutter Web password screen.
+2. Submitted a known fictional email with an incorrect password. The API returned 401 and Flutter displayed the generic message "The email or password is incorrect." The password field was cleared.
+3. Signed in as the fictional student and loaded First Semester 2026-2027 with Registrar, Library, Accounting, and Student Affairs states.
+4. Logged out and signed in as the fictional Library reviewer. Only the Library task and permitted approve/report-deficiency actions were displayed.
+5. Logged out and signed in as the fictional administrator. Sent local clearance ID 1 through the administrator-only secure exchange. The API returned success and Flutter displayed an accepted receipt with a message ID.
+6. Logged out and captured the 480×900 responsive password screen.
+
+OUTCOME
+PASS — all six states executed and were visually inspected. The final page returned to the signed-out login state. Passwords were masked during entry and are absent from screenshots, logs, and repository files.
+
+CREDENTIAL CLEANUP
+The reset tool created three ignored private temporary files only for browser input. After the run, all three plaintext files were deleted. MariaDB retains only Laravel password hashes; the tokens issued during each role session were revoked on logout.
+
+LIMITATION
+The browser page itself is served from local HTTP while every credential and API request is sent to the trusted local HTTPS API. This is a controlled development arrangement, not a public deployment claim.

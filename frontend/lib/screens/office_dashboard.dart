@@ -13,7 +13,7 @@ class OfficeDashboard extends StatefulWidget {
   });
 
   final ClearanceApi api;
-  final DemoSession session;
+  final AuthenticatedSession session;
   final VoidCallback onSignOut;
 
   @override

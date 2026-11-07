@@ -2,11 +2,12 @@
 
 ```mermaid
 flowchart TD
-    A[Role selection for controlled demo] --> B{Authorized role}
+    A[HTTPS password login] --> B{Laravel verifies password and server role}
     B -->|Student| C[Student clearance dashboard]
-    B -->|Office personnel| D[Office task queue]
-    B -->|Administrator| E[Automation review]
-    B -->|Invalid or missing session| F[Unauthorized state]
+    B -->|Office personnel| D[Assigned office task queue]
+    B -->|Administrator| E[Security and automation review]
+    B -->|Invalid credentials| F[Generic invalid-credentials state]
+    B -->|Repeated failures| X[Temporary rate-limit state]
     C --> G[Initiate clearance form]
     G --> H{Client validation}
     H -->|Invalid| I[Inline validation state]
@@ -22,9 +23,13 @@ flowchart TD
     Q --> R[Record deficiency]
     Q --> S[Approve task]
     E --> T[Failed and stalled automation list]
+    E --> Y[Protected clearance exchange]
+    Y --> Z[Administrator enters fictional clearance ID]
+    Z --> AA[Laravel minimizes and encrypts server-owned record]
+    AA --> AB[Validated HTTPS receiver outcome]
     T --> U[Failure detail]
     U --> V[Eligible manual retry]
     V --> W[Recovery outcome]
 ```
 
-Every data surface must include loading, success, empty, validation, unauthorized or forbidden, network or server failure, and recovery feedback. Wide layouts may use navigation rail plus content; narrow layouts collapse to a top app bar and one-column content without removing actions.
+The browser never selects a trusted role. It submits credentials over the controlled HTTPS endpoint and renders the dashboard identified by Laravel. Tokens remain in memory and are revoked on logout. Every data surface must include loading, success, empty, validation, unauthorized or forbidden, network or server failure, and recovery feedback. Wide layouts use a two-column login composition; narrow layouts collapse to one scrollable column without removing fields or actions.

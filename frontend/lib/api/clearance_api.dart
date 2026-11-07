@@ -22,7 +22,9 @@ class ApiException implements Exception {
 }
 
 abstract class ClearanceApi {
-  Future<DemoSession> createDemoSession(String role, {String? officeCode});
+  Future<AuthenticatedSession> login(String email, String password);
+
+  Future<void> logout(String token);
 
   Future<Map<String, dynamic>?> currentClearance(String token);
 
@@ -39,6 +41,11 @@ abstract class ClearanceApi {
   Future<List<Map<String, dynamic>>> automationFailures(String token);
 
   Future<void> retryAutomation(String token, int deliveryId);
+
+  Future<Map<String, dynamic>> sendSecureExchange(
+    String token,
+    int clearanceId,
+  );
 }
 
 class HttpClearanceApi implements ClearanceApi {
@@ -48,21 +55,27 @@ class HttpClearanceApi implements ClearanceApi {
           baseUrl ??
           const String.fromEnvironment(
             'API_BASE_URL',
-            defaultValue: 'http://127.0.0.1:8000/api/v1',
+            defaultValue: 'https://localhost:8443/api/v1',
           );
 
   final http.Client _client;
   final String baseUrl;
 
   @override
-  Future<DemoSession> createDemoSession(
-    String role, {
-    String? officeCode,
-  }) async {
-    final body = <String, dynamic>{'role': role};
-    if (officeCode != null) body['office_code'] = officeCode;
-    final response = await _send('POST', '/demo/session', body: body);
-    return DemoSession.fromJson(response['data'] as Map<String, dynamic>);
+  Future<AuthenticatedSession> login(String email, String password) async {
+    final response = await _send(
+      'POST',
+      '/auth/login',
+      body: {'email': email.trim(), 'password': password},
+    );
+    return AuthenticatedSession.fromJson(
+      response['data'] as Map<String, dynamic>,
+    );
+  }
+
+  @override
+  Future<void> logout(String token) async {
+    await _send('POST', '/auth/logout', token: token);
   }
 
   @override
@@ -139,6 +152,20 @@ class HttpClearanceApi implements ClearanceApi {
     );
   }
 
+  @override
+  Future<Map<String, dynamic>> sendSecureExchange(
+    String token,
+    int clearanceId,
+  ) async {
+    final response = await _send(
+      'POST',
+      '/secure-exchange/send',
+      token: token,
+      body: {'clearance_id': clearanceId},
+    );
+    return response['data'] as Map<String, dynamic>;
+  }
+
   Future<Map<String, dynamic>> _send(
     String method,
     String path, {
@@ -167,7 +194,7 @@ class HttpClearanceApi implements ClearanceApi {
       throw const ApiException(
         statusCode: 0,
         code: 'NETWORK_UNAVAILABLE',
-        message: 'The local API could not be reached. Check that Laravel is running.',
+        message: 'The trusted local HTTPS API could not be reached. Check Laravel and the localhost certificate.',
       );
     }
 

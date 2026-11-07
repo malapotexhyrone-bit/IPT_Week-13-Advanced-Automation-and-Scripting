@@ -16,32 +16,6 @@ class FlutterApiTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_controlled_demo_session_returns_token_and_selected_office_identity(): void
-    {
-        config(['demo.enabled' => true]);
-        $this->seed(DatabaseSeeder::class);
-
-        $this->postJson('/api/v1/demo/session', [
-            'role' => User::ROLE_OFFICE,
-            'office_code' => 'ACCOUNTING',
-        ])
-            ->assertOk()
-            ->assertJsonPath('data.user.role', User::ROLE_OFFICE)
-            ->assertJsonPath('data.user.office.code', 'ACCOUNTING')
-            ->assertJsonStructure(['data' => ['token', 'user']]);
-
-        $this->assertDatabaseHas('personal_access_tokens', ['name' => 'flutter-demo']);
-    }
-
-    public function test_demo_session_is_not_available_when_disabled(): void
-    {
-        config(['demo.enabled' => false]);
-
-        $this->postJson('/api/v1/demo/session', [
-            'role' => User::ROLE_STUDENT,
-        ])->assertNotFound();
-    }
-
     public function test_student_current_clearance_returns_only_authenticated_students_record(): void
     {
         $this->seed(DatabaseSeeder::class);

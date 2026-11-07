@@ -3,50 +3,40 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Office;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class DemoSessionController extends Controller
+class AuthenticationController extends Controller
 {
+    private const DUMMY_PASSWORD_HASH = '$2y$12$TxdPgffTNE9dePyseeJareI0m06xwApO4J6A8RBk60qDlupU3dQxi';
+
     public function store(Request $request): JsonResponse
     {
-        abort_unless(config('demo.enabled'), 404);
-
         $validated = $request->validate([
-            'role' => ['required', Rule::in([
-                User::ROLE_STUDENT,
-                User::ROLE_OFFICE,
-                User::ROLE_ADMIN,
-            ])],
-            'office_code' => ['nullable', 'string', 'max:40'],
+            'email' => ['required', 'string', 'email:rfc', 'max:255'],
+            'password' => ['required', 'string', 'max:128'],
         ]);
 
-        $query = User::query()->where('role', $validated['role']);
+        $email = Str::lower(trim($validated['email']));
+        $user = User::query()->with('office')->where('email', $email)->first();
+        $passwordMatches = Hash::check(
+            $validated['password'],
+            $user?->password ?? self::DUMMY_PASSWORD_HASH,
+        );
 
-        if ($validated['role'] === User::ROLE_OFFICE) {
-            $office = Office::query()
-                ->where('code', $validated['office_code'] ?? '')
-                ->where('is_active', true)
-                ->first();
-
-            if ($office === null) {
-                return $this->error($request, 'DEMO_OFFICE_NOT_FOUND', 'Select an available clearing office.', 422);
-            }
-
-            $query->where('office_id', $office->id);
+        if ($user === null || ! $passwordMatches) {
+            return $this->error($request, 'INVALID_CREDENTIALS', 'The email or password is incorrect.', 401);
         }
 
-        $user = $query->with('office')->first();
-
-        if ($user === null) {
-            return $this->error($request, 'DEMO_USER_UNAVAILABLE', 'The selected controlled demo user is unavailable.', 503);
-        }
-
-        $user->tokens()->where('name', 'flutter-demo')->delete();
-        $token = $user->createToken('flutter-demo', ['*'], now()->addHours(8))->plainTextToken;
+        $user->tokens()->where('name', 'flutter-web')->delete();
+        $token = $user->createToken(
+            'flutter-web',
+            ['workflow'],
+            now()->addHours(2),
+        )->plainTextToken;
 
         return response()->json([
             'data' => [
@@ -55,6 +45,13 @@ class DemoSessionController extends Controller
             ],
             'meta' => ['correlation_id' => $request->attributes->get('correlation_id')],
         ]);
+    }
+
+    public function destroy(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()?->delete();
+
+        return response()->json(null, 204);
     }
 
     private function userData(User $user): array

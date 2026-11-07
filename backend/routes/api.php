@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AuthenticationController;
 use App\Http\Controllers\Api\V1\AutomationFailureController;
 use App\Http\Controllers\Api\V1\ClearanceController;
 use App\Http\Controllers\Api\V1\CurrentUserController;
 use App\Http\Controllers\Api\V1\DeficiencyResolutionController;
-use App\Http\Controllers\Api\V1\DemoSessionController;
 use App\Http\Controllers\Api\V1\OfficeTaskQueueController;
 use App\Http\Controllers\Api\V1\OfficeTaskReviewController;
 use App\Http\Controllers\Api\V1\SecureExchangeController;
@@ -12,12 +12,14 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function (): void {
-    Route::post('/demo/session', [DemoSessionController::class, 'store']);
+    Route::post('/auth/login', [AuthenticationController::class, 'store'])
+        ->middleware('throttle:5,1');
     Route::post('/secure-exchange/receive', [SecureExchangeController::class, 'receive'])
         ->middleware('exchange.auth');
 });
 
 Route::prefix('v1')->middleware('auth:sanctum')->group(function (): void {
+    Route::post('/auth/logout', [AuthenticationController::class, 'destroy']);
     Route::get('/me', [CurrentUserController::class, 'show']);
     Route::post('/clearances', [ClearanceController::class, 'store'])
         ->middleware('role:'.User::ROLE_STUDENT);

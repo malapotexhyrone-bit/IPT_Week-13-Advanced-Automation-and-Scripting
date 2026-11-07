@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:student_clearance_frontend/api/clearance_api.dart';
 import 'package:student_clearance_frontend/models/session.dart';
 import 'package:student_clearance_frontend/screens/admin_dashboard.dart';
+import 'package:student_clearance_frontend/screens/login_screen.dart';
 import 'package:student_clearance_frontend/screens/office_dashboard.dart';
-import 'package:student_clearance_frontend/screens/role_selection_screen.dart';
 import 'package:student_clearance_frontend/screens/student_dashboard.dart';
 
 void main() {
@@ -21,7 +21,7 @@ class ClearanceApp extends StatefulWidget {
 
 class _ClearanceAppState extends State<ClearanceApp> {
   late final ClearanceApi _api = widget.api ?? HttpClearanceApi();
-  DemoSession? _session;
+  AuthenticatedSession? _session;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +30,12 @@ class _ClearanceAppState extends State<ClearanceApp> {
       debugShowCheckedModeBanner: false,
       theme: _theme(),
       home: _session == null
-          ? RoleSelectionScreen(api: _api, onSignedIn: _setSession)
+          ? LoginScreen(api: _api, onSignedIn: _setSession)
           : _dashboard(_session!),
     );
   }
 
-  Widget _dashboard(DemoSession session) {
+  Widget _dashboard(AuthenticatedSession session) {
     return switch (session.user.role) {
       'student' => StudentDashboard(
         api: _api,
@@ -52,13 +52,23 @@ class _ClearanceAppState extends State<ClearanceApp> {
         session: session,
         onSignOut: _signOut,
       ),
-      _ => RoleSelectionScreen(api: _api, onSignedIn: _setSession),
+      _ => LoginScreen(api: _api, onSignedIn: _setSession),
     };
   }
 
-  void _setSession(DemoSession session) => setState(() => _session = session);
+  void _setSession(AuthenticatedSession session) =>
+      setState(() => _session = session);
 
-  void _signOut() => setState(() => _session = null);
+  Future<void> _signOut() async {
+    final session = _session;
+    if (session == null) return;
+
+    try {
+      await _api.logout(session.token);
+    } finally {
+      if (mounted) setState(() => _session = null);
+    }
+  }
 
   ThemeData _theme() {
     const ink = Color(0xFF1D2925);

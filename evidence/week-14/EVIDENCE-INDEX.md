@@ -10,7 +10,16 @@ All entries use fictional controlled data. Source screenshots show implementatio
 | EVID-W14-HTTPS-001 | `test-results/EVID-W14-HTTPS-001-controlled-transport.txt` | HTTPS and invalid certificate | Records negotiated TLS, successful CA-validated health check, failed untrusted-root request, and controlled exchange receipt. | complete |
 | EVID-W14-AUDIT-001 | `test-results/EVID-W14-AUDIT-001-dependency-audit.txt` | Dependency review | Preserves the initial advisory finding, package remediation, final clean audit, and regression result. | complete |
 | EVID-W14-SETUP-FAIL-001 | `logs/EVID-W14-SETUP-FAILURES-001.txt` | Failure and recovery | Records the stopped-database and detached-HTTPS startup failures and their bounded recovery. | complete |
+| EVID-W14-AUTH-001 | `test-results/EVID-W14-AUTH-001-password-and-flutter-tests.txt` | Password authentication and role-bound UI | Records five authentication tests, full backend regression, Flutter analysis, and six widget tests. | complete |
+| EVID-W14-AUTH-FAIL-001 | `logs/EVID-W14-AUTH-FAILURES-001.txt` | Verification failure and correction | Preserves the guard-cache, off-screen widget, and missing-import findings with corrected retests. | complete |
+| EVID-W14-BROWSER-001 | `test-results/EVID-W14-BROWSER-001-real-role-journey.txt` | Real HTTPS Flutter journey | Records trusted-browser login for all three roles, generic invalid credentials, accepted secure exchange, and credential cleanup. | complete |
+| EVID-W14-APP-001 | `screenshots/application/EVID-W14-APP-001-login-desktop.png` | Password login, desktop | Real 1440×900 Flutter sign-in screen explaining hashing, server-owned roles, HTTPS, and throttling. | complete |
+| EVID-W14-APP-002 | `screenshots/application/EVID-W14-APP-002-invalid-credentials.png` | Invalid credentials | Real generic error with cleared password field and no account-existence disclosure. | complete |
+| EVID-W14-APP-003 | `screenshots/application/EVID-W14-APP-003-student-role.png` | Student least privilege | Real student dashboard showing Ari Santos's clearance and four office states. | complete |
+| EVID-W14-APP-004 | `screenshots/application/EVID-W14-APP-004-library-role.png` | Office least privilege | Real Library reviewer dashboard showing the assigned task and permitted actions. | complete |
+| EVID-W14-APP-005 | `screenshots/application/EVID-W14-APP-005-admin-secure-exchange.png` | Administrator secure exchange | Real administrator view with an accepted protected record, message ID, and safe status. | complete |
+| EVID-W14-APP-006 | `screenshots/application/EVID-W14-APP-006-login-narrow.png` | Responsive login | Real 480×900 one-column sign-in layout with every security control retained. | complete |
 
-## Pending journey evidence
+## Journey status
 
-Real Flutter/application captures for password login, role boundaries, secure send success, alteration/replay rejection, invalid input, certificate failure, unavailable service, desktop layout, and narrow layout will be added only when those states actually run. The central `Week-14-Screenshot-Journey-and-Evidence.docx` will be created at the end and will embed selected source images from this repository.
+Real Flutter captures now cover password login, generic invalid credentials, student and Library role boundaries, administrator secure-send success, desktop layout, and narrow layout. Alteration, replay, expiry, invalid HMAC, wrong key, missing CA, malformed input, and unavailable key remain preserved as executed backend test evidence rather than falsely represented as browser screens. The central `Week-14-Screenshot-Journey-and-Evidence.docx` will be created at the end and will embed selected source images from this repository.

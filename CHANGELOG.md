@@ -12,16 +12,20 @@ This changelog follows the continuing Weeks 13-18 Student Clearance Workflow. Ea
 - Short request and message validity windows, unique receipt storage, and replay rejection.
 - Safe receipt records containing message metadata and a payload hash without plaintext or ciphertext.
 - Twelve focused security tests covering the success path and eleven adverse or authorization cases.
+- Password login with Laravel hashing, generic invalid-credential responses, five-attempt-per-minute throttling, two-hour Sanctum tokens, and token revocation on logout.
+- Responsive Flutter sign-in screen whose dashboard is selected only from the server-owned role and office assignment.
+- Administrator Flutter action for the protected clearance exchange plus a safe local fictional-password reset tool.
+- Five authentication tests and six Flutter widget tests; the full backend suite now passes 47 tests and 201 assertions.
+- Six visually inspected real Flutter browser captures covering desktop/narrow login, invalid credentials, student role, Library role, and an accepted administrator secure exchange.
 
 ### Security
 
 - Updated Symfony HTTP Foundation, HTTP Kernel, Routing, and YAML from 7.4.22 to 7.4.23 after Composer reported seven advisories published on 4 November 2026.
-- Re-ran Composer audit with no known advisories, Laravel Pint, and the complete 44-test, 178-assertion regression suite.
+- Re-ran Composer audit with no known advisories, Laravel Pint, and the complete 47-test, 201-assertion regression suite.
 
 ### Pending
 
-- Password authentication and the Week 14 Flutter role-based interface.
-- Activity 1, Activity 2, SA8, IA5, final report, complete screenshot journey, student reflection, checkpoint commits, final tag, and release.
+- Activity 1, Activity 2, SA8, IA5, final report, complete screenshot journey, student reflection, later checkpoint commits, final tag, and release.
 
 ## v13.0.0-week13-automation - Week 13 Advanced Automation and Scripting
 

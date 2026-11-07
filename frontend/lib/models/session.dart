@@ -1,5 +1,5 @@
-class DemoUser {
-  const DemoUser({
+class AuthenticatedUser {
+  const AuthenticatedUser({
     required this.id,
     required this.name,
     required this.role,
@@ -13,9 +13,9 @@ class DemoUser {
   final String? officeCode;
   final String? officeName;
 
-  factory DemoUser.fromJson(Map<String, dynamic> json) {
+  factory AuthenticatedUser.fromJson(Map<String, dynamic> json) {
     final office = json['office'] as Map<String, dynamic>?;
-    return DemoUser(
+    return AuthenticatedUser(
       id: json['id'] as int,
       name: json['name'] as String,
       role: json['role'] as String,
@@ -25,16 +25,16 @@ class DemoUser {
   }
 }
 
-class DemoSession {
-  const DemoSession({required this.token, required this.user});
+class AuthenticatedSession {
+  const AuthenticatedSession({required this.token, required this.user});
 
   final String token;
-  final DemoUser user;
+  final AuthenticatedUser user;
 
-  factory DemoSession.fromJson(Map<String, dynamic> json) {
-    return DemoSession(
+  factory AuthenticatedSession.fromJson(Map<String, dynamic> json) {
+    return AuthenticatedSession(
       token: json['token'] as String,
-      user: DemoUser.fromJson(json['user'] as Map<String, dynamic>),
+      user: AuthenticatedUser.fromJson(json['user'] as Map<String, dynamic>),
     );
   }
 }

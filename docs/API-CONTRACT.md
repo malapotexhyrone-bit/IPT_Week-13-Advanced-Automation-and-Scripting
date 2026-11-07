@@ -5,7 +5,8 @@ Only routes marked implemented are authoritative. Planned routes remain design t
 | Status | Method and path | Authorized actor | Purpose | Key outcomes |
 | --- | --- | --- | --- | --- |
 | Implemented | `POST /api/v1/clearances` | Student | Initiate one clearance and create one task per active office | `201`, `409` duplicate, `422` invalid, `401` unauthenticated, `403` wrong role, `503` no active offices |
-| Implemented | `POST /api/v1/demo/session` | Controlled local demonstrator | Issue an in-memory Flutter token for a fictional seeded user; disabled outside the configured demo environment | `200`, `403`, `422` |
+| Implemented | `POST /api/v1/auth/login` | Fictional registered actor | Verify email and password hash, apply request throttling, and issue a two-hour Sanctum token containing the server-owned role | `200`, `401` generic invalid credentials, `422` invalid input, `429` throttled |
+| Implemented | `POST /api/v1/auth/logout` | Authenticated actor | Revoke the current bearer token | `204`, `401` |
 | Implemented | `GET /api/v1/me` | Authenticated actor | Read the minimum role and office context required by the Flutter shell | `200`, `401` |
 | Implemented | `GET /api/v1/clearances/current` | Student | Read the authenticated student's clearance and office-task summary | `200`, `404`, `401`, `403` |
 | Implemented | `GET /api/v1/office-tasks` | Office personnel | List only tasks assigned to the authenticated reviewer's office | `200`, `401`, `403` |
@@ -14,6 +15,14 @@ Only routes marked implemented are authoritative. Planned routes remain design t
 | Implemented | `POST /api/v1/office-tasks/{officeTask}/approve` | Assigned office personnel | Approve a pending or re-review task; complete the clearance after the final approval | `200`, `403`, `409` |
 | Implemented | `GET /api/v1/automation/failures` | Administrator | List automation items requiring human action without exposing message bodies or student details | `200`, `403` |
 | Implemented | `POST /api/v1/automation/deliveries/{automationDelivery}/retry` | Administrator | Retry an eligible transient failure while preserving earlier attempts and adding one bounded cycle | `202`, `403`, `409` |
+| Implemented | `POST /api/v1/secure-exchange/send` | Administrator | Load server-owned clearance data, minimize and encrypt it, and send it through validated HTTPS | `202`, `401`, `403`, `422`, `503` |
+| Implemented | `POST /api/v1/secure-exchange/receive` | HMAC-authenticated service | Verify the service request and authenticated envelope, reject stale/replayed data, and store safe receipt metadata | `202`, `401`, `409`, `422`, `503` |
+
+## Implemented authentication controls
+
+The login request accepts only `email` and `password`. A client-provided role is ignored: the response role and office assignment come from the matched server record. Passwords are verified through Laravel hashing and never returned or logged. Unknown email and wrong password receive the same `INVALID_CREDENTIALS` response, including a dummy hash check for the unknown-account path. The endpoint permits five attempts per minute before returning `429`. A successful login revokes the actor's earlier `flutter-web` token and issues one two-hour Sanctum token. Logout deletes the current token.
+
+Seeded accounts do not contain a committed usable password. `tools/reset-demo-password.php` generates a strong one-time-displayed password for an existing fictional `@example.test` account and stores only its hash.
 
 ## Implemented automation controls
 

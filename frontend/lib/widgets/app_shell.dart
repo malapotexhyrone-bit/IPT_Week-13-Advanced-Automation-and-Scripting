@@ -12,7 +12,7 @@ class AppShell extends StatelessWidget {
     this.actions = const [],
   });
 
-  final DemoSession session;
+  final AuthenticatedSession session;
   final String title;
   final String subtitle;
   final VoidCallback onSignOut;
@@ -41,7 +41,7 @@ class AppShell extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
-              tooltip: 'Sign out of demo',
+              tooltip: 'Sign out securely',
               onPressed: onSignOut,
               icon: const Icon(Icons.logout_rounded),
             ),
@@ -117,7 +117,7 @@ class _BrandMark extends StatelessWidget {
 class _Identity extends StatelessWidget {
   const _Identity({required this.user});
 
-  final DemoUser user;
+  final AuthenticatedUser user;
 
   @override
   Widget build(BuildContext context) {
